@@ -6,19 +6,25 @@ namespace EComerence.Core.Domain
 {
     public class Order : Entity
     {
-        public Guid UserId { get; protected set; }
+        public Guid OrderListId { get; protected set; }
         public Guid ProductId { get; protected set; }
         public string ProductName { get; protected set; }
         public int Amount { get; protected set; }
         public decimal Price { get; protected set; }
 
-        public Order(Guid userId,Guid productId,string productName, decimal price  , int amount)
+        public Order(Guid orderListId,Guid productId,string productName, decimal price  , int amount)
         {
-            UserId = userId;
+            Id = Guid.NewGuid();
+            OrderListId = orderListId;
             ProductId = productId;
             ProductName = productName;
             Amount = amount;
-            Price = Convert.ToDecimal(price);
+            Price = Convert.ToDecimal(price* amount);
+        }
+        public void UpdateAmmout(int amount)
+        {
+            Price = Convert.ToDecimal(Price * amount);
+            Amount = amount;
         }
     }
 }

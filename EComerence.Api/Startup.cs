@@ -20,7 +20,6 @@ using EComerence.Core.Repositories;
 using EComerence.Infrastructure.Services;
 using EComerence.Infrastructure.Settings;
 using EComerence.Infrastructure.Mappers;
-using EComerence.Infrastructure.Services;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -56,6 +55,7 @@ namespace EComerence.Api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProducerService, ProducerService>();
+            services.AddScoped<IOrderListService, OrderListService>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("JWT"));
             services.Configure<CookiePolicyOptions>(options =>

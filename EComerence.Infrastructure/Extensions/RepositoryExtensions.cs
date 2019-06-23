@@ -25,7 +25,7 @@ namespace EComerence.Infrastructure.Extensions
             var product = await repository.GetAsync(id);
             if (product == null)
             {
-                throw new Exception($"User with id: '{id}' does not exist.");
+                throw new Exception($"Product with id: '{id}' does not exist.");
             }
 
             return product;
@@ -36,7 +36,7 @@ namespace EComerence.Infrastructure.Extensions
             var producer = await repository.GetAsync(id);
             if (producer == null)
             {
-                throw new Exception($"User with id: '{id}' does not exist.");
+                throw new Exception($"Producer with id: '{id}' does not exist.");
             }
 
             return producer;
@@ -47,7 +47,7 @@ namespace EComerence.Infrastructure.Extensions
             var category = await repository.GetAsync(id);
             if (category == null)
             {
-                throw new Exception($"User with id: '{id}' does not exist.");
+                throw new Exception($"Category with id: '{id}' does not exist.");
             }
 
             return category;
@@ -58,7 +58,7 @@ namespace EComerence.Infrastructure.Extensions
             var producer = await repository.GetAsync(name);
             if (producer == null)
             {
-                throw new Exception($"User with id: '{name}' does not exist.");
+                throw new Exception($"Producer with name: '{name}' does not exist.");
             }
 
             return producer;
@@ -69,10 +69,20 @@ namespace EComerence.Infrastructure.Extensions
             var category = await repository.GetAsync(name);
             if (category == null)
             {
-                throw new Exception($"User with id: '{name}' does not exist.");
+                throw new Exception($"category with name: '{name}' does not exist.");
             }
 
             return category;
+        }
+        public static async Task<OrderList> GetOrFailAsync(this IOrderListRepository repository, Guid id)
+        {
+            var orderList = await repository.GetAsync(id);
+            if (orderList == null)
+            {
+                throw new Exception($"OrderList with id: '{id}' does not exist.");
+            }
+
+            return orderList;
         }
 
         public static async Task<Producer> SetOrGetExistingAsync(this IProducerRepository repository, string name)

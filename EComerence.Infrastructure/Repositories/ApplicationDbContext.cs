@@ -13,7 +13,7 @@ namespace EComerence.Infrastructure.Repositories
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
 
-
+        public DbSet<Order> Orders { get; set; }
         public DbSet<OrderList> OrderLists { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }

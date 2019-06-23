@@ -48,5 +48,11 @@ namespace EComerence.Infrastructure.Repositories
 
         }
 
+        public async Task<IEnumerable<OrderList>> BrowseAsync(Guid userId)
+        {
+            var xOdrerLists = orderLists.AsEnumerable();
+            xOdrerLists = xOdrerLists.Where(x => x.UserId == userId);
+            return await Task.FromResult(xOdrerLists);
+        }
     }
 }
