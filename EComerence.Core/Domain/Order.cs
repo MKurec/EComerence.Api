@@ -12,9 +12,11 @@ namespace EComerence.Core.Domain
         public int Amount { get; protected set; }
         public decimal Price { get; protected set; }
 
-        public Order(Guid orderListId,Guid productId,string productName, decimal price  , int amount)
+        protected Order() { }
+
+        public Order(Guid id,Guid orderListId,Guid productId,string productName, decimal price  , int amount)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             OrderListId = orderListId;
             ProductId = productId;
             ProductName = productName;

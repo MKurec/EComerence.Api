@@ -21,6 +21,8 @@ namespace EComerence.Core.Domain
 
         public DateTime? PucharsedAt { get; protected set; }
 
+        protected OrderList () { }
+
         public OrderList(Guid id,Guid userId)
         {
             Id = id;
@@ -30,14 +32,14 @@ namespace EComerence.Core.Domain
 
         public void AddOrder(Product product, int amount)
         {
-            if( _orders.Where(x => x.Id == product.Id).Count() !=0 )
+            if( _orders.Where(x => x.Id == product.Id).Count() > 0 )
             {
                 var order = _orders.SingleOrDefault(x => x.Id == product.Id);
                 var orderAmount = order.Amount;
                 order.UpdateAmmout(amount+orderAmount);
             }
 
-            else _orders.Add(new Order(this.Id, product.Id,product.Name, product.Price, amount));
+            else _orders.Add(new Order(Guid.NewGuid(),this.Id, product.Id,product.Name, product.Price, amount));
         }
         public void RemoveOrder(Guid orderId)
         {
