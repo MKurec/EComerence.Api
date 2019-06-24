@@ -32,9 +32,9 @@ namespace EComerence.Core.Domain
 
         public void AddOrder(Product product, int amount)
         {
-            if( _orders.Where(x => x.Id == product.Id).Count() > 0 )
+            if( _orders.Where(x => x.ProductId == product.Id).Count() > 0 )
             {
-                var order = _orders.SingleOrDefault(x => x.Id == product.Id);
+                var order = _orders.SingleOrDefault(x => x.ProductId == product.Id);
                 var orderAmount = order.Amount;
                 order.UpdateAmmout(amount+orderAmount);
             }

@@ -23,7 +23,7 @@ namespace EComerence.Infrastructure.Repositories
 
         public async Task<OrderList> GetAsync(Guid id)
         {
-            var @orderList = await Task.FromResult(Context.Set<OrderList>().SingleOrDefault(x => x.Id == id));
+            var @orderList = await Task.FromResult(Context.Set<OrderList>().Include(x => x.Orders).SingleOrDefault(x => x.Id == id));
             return @orderList;
         }
 

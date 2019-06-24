@@ -10,7 +10,8 @@ namespace EComerence.Infrastructure.Repositories
     {
         const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=EComerence;Trusted_Connection=True;";
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
+        }
 
 
         public DbSet<Order> Orders { get; set; }
