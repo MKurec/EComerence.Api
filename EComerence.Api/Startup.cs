@@ -22,6 +22,8 @@ using EComerence.Infrastructure.Settings;
 using EComerence.Infrastructure.Mappers;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace EComerence.Api
 {
@@ -56,6 +58,7 @@ namespace EComerence.Api
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProducerService, ProducerService>();
             services.AddScoped<IOrderListService, OrderListService>();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("JWT"));
             services.Configure<CookiePolicyOptions>(options =>
@@ -87,55 +90,78 @@ namespace EComerence.Api
                     };
                 });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-                var security = new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }},
-                };
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddApplicationInsightsTelemetry();
+            /* services.AddSwaggerGen(c =>
+             {
+                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+                 var security = new Dictionary<string, IEnumerable<string>>
+                 {
+                     { "Bearer", new string[] { } },
+                 };
 
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-                c.AddSecurityRequirement(security);
-            });
+                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                 {
+                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                     Name = "Authorization",
+                     In = ParameterLocation.Header,
+                     Type = SecuritySchemeType.ApiKey,
+                     Scheme = "Bearer"
+                 });
+                 c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                 {
+                     {
+                         new OpenApiSecurityScheme
+                         {
+                             Reference = new OpenApiReference
+                             {
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id = "Bearer"
+                             },
+                             Scheme = "oauth2",
+                             Name = "Bearer",
+                             In = ParameterLocation.Header,
+
+                         },
+                         new List<string>()
+                     },
+                 });
+             });        */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext db)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseStaticFiles();
-
-            app.UseSwagger();
+            app.UseFileServer();
             db.Database.Migrate();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+         //   app.UseSwagger();
+          /* app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
                 c.DocumentTitle = "Title Documentation";
                 c.DocExpansion(DocExpansion.None);
 
-            });
+            }); */
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
+            // app.UseMvcWithDefaultRoute();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
