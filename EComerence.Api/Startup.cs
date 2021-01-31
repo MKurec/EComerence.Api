@@ -92,7 +92,7 @@ namespace EComerence.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddApplicationInsightsTelemetry();
-            /* services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
              {
                  c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
                  var security = new Dictionary<string, IEnumerable<string>>
@@ -126,7 +126,7 @@ namespace EComerence.Api
                          new List<string>()
                      },
                  });
-             });        */
+             });        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -145,23 +145,17 @@ namespace EComerence.Api
             app.UseFileServer();
             db.Database.Migrate();
 
-         //   app.UseSwagger();
-          /* app.UseSwaggerUI(c =>
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
                 c.DocumentTitle = "Title Documentation";
                 c.DocExpansion(DocExpansion.None);
 
-            }); */
+            }); 
             app.UseAuthentication();
-            // app.UseMvcWithDefaultRoute();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

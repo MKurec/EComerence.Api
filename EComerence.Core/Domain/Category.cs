@@ -7,6 +7,9 @@ namespace EComerence.Core.Domain
     public class Category :Entity
     {
         public string Name { get; protected set; }
+        public ICollection<Category> SubCategories { get; } = new List<Category>();
+        public Category Parent { get; protected set; }
+        public Guid? ParentId { get; protected set; }
         public Category(Guid id,string name)
         {
             Id = id;

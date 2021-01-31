@@ -27,5 +27,18 @@ namespace EComerence.Infrastructure.Repositories
         {
             optionsBuilder.UseSqlServer(connectionString, b => b.MigrationsAssembly("EComerence.Api"));
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Name);
+                entity.HasOne(x => x.Parent)
+                    .WithMany(x => x.SubCategories)
+                    .HasForeignKey(x => x.ParentId)
+                    .IsRequired(false)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+         }
     }
 }
