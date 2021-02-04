@@ -14,5 +14,7 @@ namespace EComerence.Infrastructure.Services
         Task<IEnumerable<CategoryDto>> BrowseAsync(string name = null);
         Task UpdateAsync(Guid id, string name);
         Task DeleteAsync(Guid id);
+        Task AddSubCategory(Guid categoryId, Guid subCategoryId, string name);
+        Task CreateAsync(Guid id, string name);
     }
 }

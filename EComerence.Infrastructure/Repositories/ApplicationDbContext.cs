@@ -33,12 +33,12 @@ namespace EComerence.Infrastructure.Repositories
             {
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Name);
-                entity.HasOne(x => x.Parent)
-                    .WithMany(x => x.SubCategories)
-                    .HasForeignKey(x => x.ParentId)
-                    .IsRequired(false)
-                    .OnDelete(DeleteBehavior.Restrict);
-            });
+                entity.HasMany(x => x.SubCategories)
+                      .WithOne(e => e.Parent)
+                      .HasForeignKey(x => x.ParentId)
+                      .IsRequired(false)
+                      .OnDelete(DeleteBehavior.Restrict);
+            }); 
          }
     }
 }

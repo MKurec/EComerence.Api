@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EComerence.Core.Domain;
 using EComerence.Core.Repositories;
 using EComerence.Infrastructure.DTO;
 using EComerence.Infrastructure.Extensions;
@@ -47,6 +48,30 @@ namespace EComerence.Infrastructure.Services
         {
             var @category = await _categoryRepository.GetOrFailAsync(id);
             await _categoryRepository.DeleteAsync(@category);
+        }
+
+        public async Task AddSubCategory(Guid categoryId,Guid subCategoryId, string name)
+        {
+            var @category = await _categoryRepository.GetAsync(name);
+            if (@category != null)
+            {
+                throw new Exception($"Category named: ' {name}' alredy exist.");
+            }
+            @category = new Category(subCategoryId, name);
+            await _categoryRepository.AddAsync(@category);
+            var @parentcategory = await _categoryRepository.GetOrFailAsync(categoryId);
+            @parentcategory.AddSubCategory(@category);
+            await _categoryRepository.UpdateAsync(@parentcategory);
+        }
+        public async Task CreateAsync(Guid id,string name)
+        {
+            var @category = await _categoryRepository.GetAsync(name);
+            if(@category != null)
+            {
+                throw new Exception($"Category named: ' {name}' alredy exist.");
+            }
+            @category = new Category(id, name);
+            await _categoryRepository.AddAsync(@category);
         }
     }
 }

@@ -45,11 +45,25 @@ namespace EComerence.Api.Controllers
             return Json(@category);
         }
 
-        [HttpPut("{categoryId}")]
-        public async Task<IActionResult> Put(Guid categoryId, [FromBody]UpdateProducer command)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]AddCategory command)
         {
-            await _categoryService.UpdateAsync(categoryId, command.Name);
-            return NoContent();
+            var Id = Guid.NewGuid();
+            await _categoryService.CreateAsync(Id, command.name);
+            return Created($"/category/{Id}", null);
+        }
+        //[HttpPut("{categoryId}")]
+        //public async Task<IActionResult> Put(Guid categoryId, [FromBody] AddCategory command)
+        //{
+        //    await _categoryService.UpdateAsync(categoryId, command.name);
+        //    return NoContent();
+        //}
+        [HttpPut("{parentCategoryId}")]
+        public async Task<IActionResult> Put(Guid parentCategoryId, [FromBody] AddCategory command)
+        {
+            var Id = Guid.NewGuid();
+            await _categoryService.AddSubCategory(parentCategoryId,Id,command.name);
+            return Created($"/category/{Id}", null);
         }
         [HttpDelete("{categoryId}")]
         public async Task<IActionResult> Delete(Guid categoryId)
