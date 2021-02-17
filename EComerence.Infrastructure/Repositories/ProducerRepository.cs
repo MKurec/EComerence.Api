@@ -46,7 +46,7 @@ namespace EComerence.Infrastructure.Repositories
             var xproducers = producers.AsEnumerable();
             if (!string.IsNullOrEmpty(name))
             {
-                xproducers = xproducers.Where(x => x.Name.ToLowerInvariant().Contains(name.ToLowerInvariant()));
+                xproducers = xproducers.Where(x => x.Name.ToLower().Contains(name.ToLower()));
             }
             return await Task.FromResult(xproducers);
         }

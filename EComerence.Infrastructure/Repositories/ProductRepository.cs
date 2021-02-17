@@ -28,8 +28,8 @@ namespace EComerence.Infrastructure.Repositories
         }
         public async Task<Product> GetAsync(string name)
         {
-            var @home = await Task.FromResult(Context.Set<Product>().SingleOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant()));
-            return @home;
+            var @product = await Task.FromResult(Context.Set<Product>().SingleOrDefault(x => x.Name.ToLower() == name.ToLower()));
+            return @product;
         }
 
         public async Task AddAsync(Product @product)
@@ -60,7 +60,7 @@ namespace EComerence.Infrastructure.Repositories
             var xproducts = products.AsEnumerable();
             if (!string.IsNullOrEmpty(name))
             {
-                xproducts = xproducts.Where(x => x.Name.ToLowerInvariant().Contains(name.ToLowerInvariant()));
+                xproducts = xproducts.Where(x => x.Name.ToLower().Contains(name.ToLower()));
             }
             return await Task.FromResult(xproducts);
         }

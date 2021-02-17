@@ -34,6 +34,7 @@ namespace EComerence.Api
             Configuration = configuration;
         }
         private readonly JwtSettings _jWTSettings;
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IOptions<JwtSettings> jwtSeting, IConfiguration configuration)
         {
             _jWTSettings = jwtSeting.Value;
@@ -66,6 +67,19 @@ namespace EComerence.Api
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000",
+                                                          "https://localhost:3000");
+                                  });
             });
 
             services.AddSingleton(AutoMapperConfig.Initialize());
@@ -141,6 +155,9 @@ namespace EComerence.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseFileServer();
             db.Database.Migrate();

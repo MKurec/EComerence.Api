@@ -43,18 +43,19 @@ namespace EComerence.Infrastructure.Services
         }
 
 
-        public async Task AddAsync(Guid id, string name, int amount, decimal price, string producerName, string categoryName)
+        public async Task AddAsync(Guid id, string name, int amount, decimal price, string producerName, string categoryName, string descryption)
         {
             var @product = await _productRepository.GetAsync(name);
             var @producer = await _producerRepository.SetOrGetExistingAsync(producerName);
-            var @category = await _categoryRepository.SetOrGetExistingAsync(categoryName);
-            @product = new Product(id, name, amount, price, @producer.Name, @producer.Id, @category.Name, @category.Id);
+            var @category = await _categoryRepository.GetAsync(categoryName);
+            if (@category == null) throw new Exception($"Cannot find category with '{categoryName}' ");
+            @product = new Product(id, name, amount, price, @producer.Name, @producer.Id, @category.Name, @category.Id,descryption);
             await _productRepository.AddAsync(@product);
         }
-        public async Task UpdateAsync(Guid id, string name, decimal price, int amount)
+        public async Task UpdateAsync(Guid id, string description, decimal price, int amount)
         {
             var @product = await _productRepository.GetOrFailAsync(id);
-            @product.SetName(name);
+            @product.SetDescription(description);
             @product.SetAmount(amount);
             @product.SetPrice(price);
             await _productRepository.UpdateAsync(@product);

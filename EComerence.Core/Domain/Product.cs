@@ -11,15 +11,17 @@ namespace EComerence.Core.Domain
         public decimal Price { get; protected set; }
         public Guid ProducerId { get; protected set; }
         public Guid CategoryId { get; protected set; }
+        public string Description { get; protected set; }
         public string ProducerName { get; protected set; }
         public string CategoryName { get; protected set; }
 
-        public Product(Guid id,string name, int amount, decimal price,string producerName  ,Guid producerId, string categoryName, Guid categoryId  )
+        public Product(Guid id,string name, int amount, decimal price,string producerName  ,Guid producerId, string categoryName, Guid categoryId, string description)
         {
             Id = id;
             SetName(name);
             SetAmount(amount);
             SetPrice(price);
+            SetDescription(description);
             ProducerId = producerId;
             ProducerName = producerName;
             CategoryId = categoryId;
@@ -33,6 +35,14 @@ namespace EComerence.Core.Domain
                 throw new Exception($"Product with id : '{Id}' can not have empty name");
             }
             Name = name;
+        }
+        public void SetDescription(string description)
+        {
+            //if (string.IsNullOrEmpty(description))
+            //{
+            //    throw new Exception($"Product with id : '{Id}' can not have empty description");
+            //}
+            Description = description;
         }
         public void SetAmount(int amount)
         {

@@ -76,6 +76,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [],
+  
+  components: true,
 
   /*
   ** Nuxt.js modules
@@ -83,6 +85,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/font-awesome',
+    '@nuxtjs/vuetify',
     '@nuxtjs/tailwindcss'
   ],
   /*
@@ -90,7 +93,11 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  devServer: {
+    proxy: 'https://localhost:44367/',
   }
 
 
 }
+

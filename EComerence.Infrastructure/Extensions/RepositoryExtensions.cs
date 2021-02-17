@@ -84,7 +84,7 @@ namespace EComerence.Infrastructure.Extensions
 
             return orderList;
         }
-
+        // TODO: Delete
         public static async Task<Producer> SetOrGetExistingAsync(this IProducerRepository repository, string name)
         {
             var @producer = await repository.GetAsync(name);

@@ -37,6 +37,7 @@
   "devDependencies": {
     "@babel/preset-env": "~7.12.1",
     "@nuxtjs/tailwindcss": "^3.4.2",
+    "@nuxtjs/vuetify": "^1.11.3",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "@vue/cli-plugin-babel": "~4.5.8",
     "@vue/cli-service": "~4.5.8",

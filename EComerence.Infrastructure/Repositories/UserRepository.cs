@@ -42,7 +42,7 @@ namespace EComerence.Infrastructure.Repositories
 
         public async Task<User> GetAsync(string email)
         {
-            var @user = await Task.FromResult(_users.SingleOrDefault(x => x.Email.ToLowerInvariant() == email.ToLowerInvariant()));
+            var @user = await Task.FromResult(_users.SingleOrDefault(x => x.Email.ToLower() == email.ToLower()));
             return user;
         }
 

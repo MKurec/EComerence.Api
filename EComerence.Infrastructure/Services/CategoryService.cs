@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EComerence.Infrastructure.Services
 {
@@ -28,6 +29,7 @@ namespace EComerence.Infrastructure.Services
         public async Task<CategoryDto> GetAsync(string name)
         {
             var @category = await _categoryRepository.GetAsync(name);
+
             return _mapper.Map<CategoryDto>(@category);
 
         }

@@ -31,7 +31,7 @@ namespace EComerence.Infrastructure.Repositories
             var xcategories = categories.AsEnumerable();
             if (!string.IsNullOrEmpty(name))
             {
-                xcategories = xcategories.Where(x => x.Name.ToLowerInvariant().Contains(name.ToLowerInvariant()));
+                xcategories = xcategories.Where(x => x.Name.ToLower().Contains(name.ToLower()));
             }
             return await Task.FromResult(xcategories);
         }

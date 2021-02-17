@@ -40,14 +40,14 @@ namespace EComerence.Api.Controllers
         public async Task<IActionResult> Post([FromBody]AddProduct command)
         {
             var Id = Guid.NewGuid();
-            await _productService.AddAsync(Id, command.Name, command.Amount, command.Price, command.ProducerName, command.CategoryName);
+            await _productService.AddAsync(Id, command.Name, command.Amount, command.Price, command.ProducerName, command.CategoryName,command.Description);
             return Created($"/product/{Id}", null);
 
         }
         [HttpPut("{productId}")]
         public async Task<IActionResult> Put(Guid productId, [FromBody]UpdateProduct command)
         {
-            await _productService.UpdateAsync(productId, command.Name,command.Price,command.Amount);
+            await _productService.UpdateAsync(productId, command.Description, command.Price,command.Amount);
             return NoContent();
         }
         [HttpDelete("{productId}")]

@@ -14,7 +14,6 @@
   <ItemGroup>
     <Content Remove="ClientApp\appsettings.Development.json" />
     <Content Remove="ClientApp\appsettings.json" />
-    <Content Remove="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 
 
@@ -22,6 +21,7 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
