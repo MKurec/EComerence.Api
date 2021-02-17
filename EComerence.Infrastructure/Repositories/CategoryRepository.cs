@@ -28,7 +28,7 @@ namespace EComerence.Infrastructure.Repositories
 
         public async Task<IEnumerable<Category>> BrowseAsync(string name = "")
         {
-            var xcategories = categories.AsEnumerable();
+            var xcategories = categories.AsEnumerable().Where(x => x.ParentId == null);
             if (!string.IsNullOrEmpty(name))
             {
                 xcategories = xcategories.Where(x => x.Name.ToLower().Contains(name.ToLower()));

@@ -2,7 +2,11 @@
 <template>
   <div>
      <ul class="flex flex-col lg:flex-row ">
-      <CategoryTree :categories="categories" />
+        <v-treeview
+         activatable
+        :items="items"
+        item-children="subCategories"
+        ></v-treeview>
       <div class="grid grid-flow-col auto-cols-max md:auto-cols-min">
         <Product v-for="product in products" :product="product" :key="product.name" />
       </div>
@@ -16,14 +20,13 @@ export default {
     data() {
     return{
       products:[],
-      categories:[]
+      items:[]
     }
   },
   async fetch() {
-    this.products = await fetch('https://localhost:44367/Products').then((res) => res.json())
-  },
-  async fetch() {
-    this.categories = await fetch('https://localhost:44367/Categories').then((res) => res.json())
+    this.products = await fetch('https://localhost:44367/Products').then((res) => res.json()),
+    this.items = await fetch('https://localhost:44367/Categories').then((res) => res.json())
   }
+  
 }
 </script> 
