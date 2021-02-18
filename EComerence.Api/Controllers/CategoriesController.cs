@@ -35,9 +35,9 @@ namespace EComerence.Api.Controllers
             return Json(@category);
         }
         [HttpGet("{categoryName}")]
-        public async Task<IActionResult> Get(string name)
+        public async Task<IActionResult> Get(string categoryName)
         {
-            var @category = await _categoryService.GetAsync(name);
+            var @category = await _categoryService.GetAsync(categoryName);
             if (@category == null)
             {
                 return NotFound();

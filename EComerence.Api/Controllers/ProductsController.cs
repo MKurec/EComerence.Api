@@ -36,6 +36,16 @@ namespace EComerence.Api.Controllers
             }
             return Json(@product);
         }
+        [HttpGet("{Category}/{categoryId}")]
+        public async Task<IActionResult> Get(Guid categoryId, string Category)
+        {
+            var @product = await _productService.BrowseAsyncInCategory(categoryId);
+            if (@product == null || Category != "Category")
+            {
+                return NotFound();
+            }
+            return Json(@product);
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AddProduct command)
         {
