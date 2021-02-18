@@ -41,6 +41,12 @@ namespace EComerence.Infrastructure.Services
 
             return _mapper.Map<IEnumerable<ProductDto>>(products);
         }
+        public async Task<IEnumerable<ProductDto>> BrowseAsyncInCategory(Guid categoryId)
+        {
+            var products = await _productRepository.BrowseAsyncInCategory(categoryId);
+
+            return _mapper.Map<IEnumerable<ProductDto>>(products);
+        }
 
 
         public async Task AddAsync(Guid id, string name, int amount, decimal price, string producerName, string categoryName, string descryption)

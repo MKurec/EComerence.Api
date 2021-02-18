@@ -64,5 +64,10 @@ namespace EComerence.Infrastructure.Repositories
             }
             return await Task.FromResult(xproducts);
         }
+        public async Task<IEnumerable<Product>> BrowseAsyncInCategory(Guid categoryId)
+        {
+            var xproducts = products.AsEnumerable().Where(x => x.CategoryId == categoryId);
+            return await Task.FromResult(xproducts);
+        }
     }
 }

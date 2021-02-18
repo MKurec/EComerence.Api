@@ -11,6 +11,7 @@ namespace EComerence.Core.Repositories
         Task<Product> GetAsync(Guid id);
         Task<Product> GetAsync(string name);
         Task<IEnumerable<Product>> BrowseAsync(string name = "");
+        Task<IEnumerable<Product>> BrowseAsyncInCategory(Guid categoryId);
 
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);

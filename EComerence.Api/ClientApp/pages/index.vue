@@ -1,14 +1,19 @@
 
 <template>
   <div>
-     <ul class="flex flex-col lg:flex-row ">
+     <ul class="flex flex-col lg:flex-row gap-10 ">
         <v-treeview
+        :active.sync="active"
          activatable
         :items="items"
         item-children="subCategories"
+        return-object
         ></v-treeview>
-      <div class="grid grid-flow-col auto-cols-max md:auto-cols-min">
+      <div class="flex flex-wrap gap-4">
         <Product v-for="product in products" :product="product" :key="product.name" />
+      </div>
+      <div v-if="active">
+        {{active[0].name}}
       </div>
       </ul>
   </div>
@@ -20,7 +25,8 @@ export default {
     data() {
     return{
       products:[],
-      items:[]
+      items:[],
+      active: []
     }
   },
   async fetch() {
