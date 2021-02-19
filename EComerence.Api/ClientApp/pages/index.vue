@@ -11,12 +11,6 @@
         ></v-treeview>
       <div class="flex flex-wrap gap-4" )>
         <Product v-for="product in products" :product="product" :key="product.name" />
-        fetchProducts
-      </div>
-      <div v-if="active[0]">
-                <div ></div>
-        <Product v-for="product in products" :product="product" :key="product.name" />
-
       </div>
       </ul>
   </div>
@@ -35,11 +29,11 @@ export default {
   computed: {
     async fetchProducts({$axios,active}){
       if(active[0] != null) {
-        const products = await $axios.$get('https://localhost:44367/Products/Category/',{params :{active[0].id}})
+        let products = await $axios.$get('https://localhost:44367/Products/Category/'+active[0].id)
         this.products = products
       }
       else{
-        const products = await $axios.$get('https://localhost:44367/Products')
+        let products = await $axios.$get('https://localhost:44367/Products')
         this.products = products
       }
     }
