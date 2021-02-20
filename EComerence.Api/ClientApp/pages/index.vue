@@ -26,18 +26,17 @@ export default {
       active: []
     }
   },
-  computed: {
-    async fetchProducts({$axios,active}){
-      if(active[0] != null) {
-        let products = await $axios.$get('https://localhost:44367/Products/Category/'+active[0].id)
+  watch:{
+    active: async function(){
+      if(this.active[0] != null) {
+        let products = await this.$axios.$get('https://localhost:44367/Products/Category/'+this.active[0].id)
         this.products = products
       }
       else{
-        let products = await $axios.$get('https://localhost:44367/Products')
+        let products = await this.$axios.$get('https://localhost:44367/Products')
         this.products = products
       }
     }
-
   },
   async fetch() {
     this.items = await fetch('https://localhost:44367/Categories').then((res) => res.json())
