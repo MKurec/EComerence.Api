@@ -6,13 +6,12 @@
 </template>
 <script>
   export default {
-    data: () => {
-      return{
-        categories:[]
-      }
-    },
-    async fetch() {
-      this.categories = await fetch('https://localhost:44367/Categories').then((res) => res.json())
+     props: {
+      categories:{
+      type: Object,
+      default: () => {}
+
     }
+  }
   }
 </script>
