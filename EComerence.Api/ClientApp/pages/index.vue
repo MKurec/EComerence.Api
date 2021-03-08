@@ -10,12 +10,12 @@
         return-object
         ></v-treeview>
       <div class="flex flex-wrap gap-4" )>
-        <v-hover>
         <Product v-for="product in products" :product="product" :key="product.name" />
-        </v-hover>
       </div>
       </ul>
+      
   </div>
+  
 </template>
 
 <script>
@@ -43,6 +43,7 @@ export default {
   async fetch() {
     this.items = await fetch('https://localhost:44367/Categories').then((res) => res.json())
   }
+  
   
 }
 </script> 

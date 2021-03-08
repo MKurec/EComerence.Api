@@ -1,5 +1,6 @@
 <template>
-  <v-hover>    
+<NuxtLink :to="'Product/'+product.id" >  
+  <v-hover>  
     <template v-slot:default="{ hover }">
       <v-card
         :elevation="hover ? 24 : 6"
@@ -37,6 +38,7 @@
       </v-card>
     </template>
   </v-hover>
+ </NuxtLink>
 </template>
 <script>
 export default {
