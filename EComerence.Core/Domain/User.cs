@@ -11,7 +11,8 @@ namespace EComerence.Core.Domain
             "user", "admin"
         };
 
-        public string Name { get; protected set; }
+        public string FirstName { get; protected set; }
+        public string LastName { get; protected set; }
         public string Role { get; protected set; }
         public string Email { get; protected set; }
         public string Password { get; protected set; }
@@ -24,11 +25,12 @@ namespace EComerence.Core.Domain
         {
 
         }
-        public User(Guid id, string name, string email, string password, string role, string city, string address, string postalCode )
+        public User(Guid id, string firstName, string lastName , string email, string password, string role, string city, string address, string postalCode )
         {
             Id = id;
             SetRole(role);
-            SetName(name);
+            SetFirstName(firstName);
+            SetLastName(lastName);
             SetEmail(email);
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
@@ -36,13 +38,21 @@ namespace EComerence.Core.Domain
             PostalCode = postalCode;
             Address = address;
         }
-        public void SetName(string name)
+        public void SetFirstName(string firstName)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(firstName))
             {
-                throw new Exception($"User can not have an empty name.");
+                throw new Exception($"User can not have an empty first name.");
             }
-            Name = name;
+            FirstName = firstName;
+        }
+        public void SetLastName(string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new Exception($"User can not have an empty last name.");
+            }
+            LastName = lastName;
         }
 
         public void SetEmail(string email)

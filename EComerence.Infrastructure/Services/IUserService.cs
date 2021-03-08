@@ -9,7 +9,7 @@ namespace EComerence.Infrastructure.Services
     public interface IUserService
     {
         Task<AccountDto> GetAccountAsync(Guid userId);
-        Task RegisterAsync(Guid userId, string email,string name, string password, string city, string address, string postalCode);
+        Task RegisterAsync(Guid userId, string email,string firstName, string lastName, string password, string city, string address, string postalCode);
 
         Task<TokenDto> LoginAsync(string email, string password);
     }

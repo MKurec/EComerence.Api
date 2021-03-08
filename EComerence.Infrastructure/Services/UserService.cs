@@ -31,7 +31,7 @@ namespace EComerence.Infrastructure.Services
             return _mapper.Map<AccountDto>(user);
         }
 
-        public async Task RegisterAsync(Guid userId, string email,   string name, string password, string city, string address, string postalCode)
+        public async Task RegisterAsync(Guid userId, string email,   string firstName, string lastName, string password, string city, string address, string postalCode)
         {
             var user = await _userRepository.GetAsync(email);
             if (user != null)
@@ -39,7 +39,7 @@ namespace EComerence.Infrastructure.Services
                 throw new Exception($"User with email: '{email}' already exists.");
             }
             var role = "user";
-            user = new User(userId, name, email, password, role, city, address, postalCode);
+            user = new User(userId, firstName, lastName , email, password, role, city, address, postalCode);
             await _userRepository.AddAsync(user);
         }
 

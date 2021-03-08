@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace PGSTask.Web.Api.Controllers
+namespace EComerence.Api.Controllers
 {
     [Route("[controller]")]
     public class UsersController : DefaultController
@@ -31,7 +31,7 @@ namespace PGSTask.Web.Api.Controllers
         public async Task<IActionResult> Post([FromBody]RegisterUser command)
         {
             var Id = Guid.NewGuid();
-            await _userService.RegisterAsync(Id, command.Email, command.Name, command.Password, command.City,command.Address,command.PostalCode);
+            await _userService.RegisterAsync(Id, command.Email, command.FirstName, command.LastName, command.Password, command.City,command.Address,command.PostalCode);
             return Created($"/account/{Id}", null);
 
         }

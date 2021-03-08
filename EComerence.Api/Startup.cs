@@ -78,7 +78,9 @@ namespace EComerence.Api
                                   builder =>
                                   {
                                       builder.WithOrigins("http://localhost:3000",
-                                                          "https://localhost:3000");
+                                                          "https://localhost:3000")
+                                                            .AllowAnyHeader()
+                                                        .AllowAnyMethod(); ;
                                   });
             });
 
