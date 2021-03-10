@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Header from '../../ClientApp2/components/header/Header.vue'
+import Header from '../../ClientApp/components/header/Header.vue'
 export default {
   components: { Header },
 }

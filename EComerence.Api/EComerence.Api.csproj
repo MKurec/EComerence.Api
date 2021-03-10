@@ -43,4 +43,9 @@
     <ProjectReference Include="..\EComerence.Infrastructure\EComerence.Infrastructure.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
 </Project>

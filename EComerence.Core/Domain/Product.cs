@@ -6,7 +6,7 @@ namespace EComerence.Core.Domain
 {
     public class Product :Entity
     {
-        private static List<string> _brandTags = new List<string>
+        private static readonly List<string> _brandTags = new List<string>
         {
             "premium", "medium ", "budget"
         };
@@ -16,12 +16,13 @@ namespace EComerence.Core.Domain
         public decimal Price { get; protected set; }
         public Guid ProducerId { get; protected set; }
         public Guid CategoryId { get; protected set; }
-        public string BrandTag { get; protected set; }
+        public string? BrandTag { get; protected set; }
         public string Description { get; protected set; }
         public string ProducerName { get; protected set; }
         public string CategoryName { get; protected set; }
+        public string? ImageLocation { get; protected set; } 
 
-        public Product(Guid id,string name, int amount, decimal price,string producerName  ,Guid producerId, string categoryName, Guid categoryId, string description,string brandTag)
+        public Product(Guid id, string name, int amount, decimal price, string producerName, Guid producerId, string categoryName, Guid categoryId, string description, string brandTag)
         {
             Id = id;
             SetName(name);
@@ -33,7 +34,6 @@ namespace EComerence.Core.Domain
             ProducerName = producerName;
             CategoryId = categoryId;
             CategoryName = categoryName;
-            
         }
         public void SetName(string name)
         {
@@ -65,16 +65,24 @@ namespace EComerence.Core.Domain
         }
         public void SetBrandTag(string brandTag)
         {
-            if (string.IsNullOrWhiteSpace(brandTag))
-            {
-                throw new Exception($"Product can not have an empty brand tag.");
-            }
-            brandTag = brandTag.ToLowerInvariant();
-            if (!_brandTags.Contains(brandTag))
-            {
-                throw new Exception($"Product can not have a brand tag: '{brandTag}'.");
-            }
+            //if (string.IsNullOrWhiteSpace(brandTag))
+            //{
+            //    throw new Exception($"Product can not have an empty brand tag.");
+            //}
+            //brandTag = brandTag.ToLowerInvariant();
+            //if (!_brandTags.Contains(brandTag))
+            //{
+            //    throw new Exception($"Product can not have a brand tag: '{brandTag}'.");
+            //}
             BrandTag = brandTag;
+        }
+        public void SetImageLocation(String imageLocation)
+        {
+            if (string.IsNullOrEmpty(imageLocation))
+            {
+                throw new Exception($"Product with imageLocation : '{imageLocation}' can not have empty image location");
+            }
+            ImageLocation = imageLocation;
         }
 
 

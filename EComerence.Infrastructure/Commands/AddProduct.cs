@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,6 @@ namespace EComerence.Infrastructure.Commands
         public string ProducerName { get;  set; }
         public string CategoryName { get;  set; }
         public string Description { get; set; }
+        public string BrandTag { get; set; }
     }
 }
