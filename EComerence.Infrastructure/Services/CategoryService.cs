@@ -38,6 +38,11 @@ namespace EComerence.Infrastructure.Services
             var categories = await _categoryRepository.BrowseAsync(name);
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
+        public async Task<IEnumerable<CategoryTreeDto>> CategoryTreeAsync(string name = null)
+        {
+            var categories = await _categoryRepository.BrowseForTreeAsync(name);
+            return _mapper.Map<IEnumerable<CategoryTreeDto>>(categories);
+        }
 
 
         public async Task UpdateAsync(Guid id, string name)
@@ -60,9 +65,9 @@ namespace EComerence.Infrastructure.Services
                 throw new Exception($"Category named: ' {name}' alredy exist.");
             }
             @category = new Category(subCategoryId, name);
-            await _categoryRepository.AddAsync(@category);
             var @parentcategory = await _categoryRepository.GetOrFailAsync(categoryId);
             @parentcategory.AddSubCategory(@category);
+            await _categoryRepository.AddAsync(@category);
             await _categoryRepository.UpdateAsync(@parentcategory);
         }
         public async Task CreateAsync(Guid id,string name)

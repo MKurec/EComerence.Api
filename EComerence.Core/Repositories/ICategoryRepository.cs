@@ -9,6 +9,7 @@ namespace EComerence.Core.Repositories
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> BrowseAsync(string name = "");
+        Task<IEnumerable<Category>> BrowseForTreeAsync(string name = "");
         Task<Category> GetAsync(string name);
         Task<Category> GetAsync(Guid id);
 

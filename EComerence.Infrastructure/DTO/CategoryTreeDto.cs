@@ -5,8 +5,10 @@ using System.Text;
 
 namespace EComerence.Infrastructure.DTO
 {
-   public class CategoryDto
+   public class CategoryTreeDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
+        public ICollection<CategoryTreeDto> SubCategories { get; set; }
     }
 }

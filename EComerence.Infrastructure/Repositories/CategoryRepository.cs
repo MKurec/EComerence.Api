@@ -26,9 +26,18 @@ namespace EComerence.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Category>> BrowseAsync(string name = "")
+        public async Task<IEnumerable<Category>> BrowseForTreeAsync(string name = "")
         {
             var xcategories = categories.AsEnumerable().Where(x => x.ParentId == null);
+            if (!string.IsNullOrEmpty(name))
+            {
+                xcategories = xcategories.Where(x => x.Name.ToLower().Contains(name.ToLower()));
+            }
+            return await Task.FromResult(xcategories);
+        }
+        public async Task<IEnumerable<Category>> BrowseAsync(string name = "")
+        {
+            var xcategories = categories.AsEnumerable();
             if (!string.IsNullOrEmpty(name))
             {
                 xcategories = xcategories.Where(x => x.Name.ToLower().Contains(name.ToLower()));

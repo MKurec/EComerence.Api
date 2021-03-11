@@ -24,6 +24,13 @@ namespace EComerence.Api.Controllers
             var categories = await _categoryService.BrowseAsync();
             return Json(categories);
         }
+        [HttpGet("Tree")]
+        public async Task<IActionResult> Get(bool a)
+        {
+
+            var categories = await _categoryService.CategoryTreeAsync();
+            return Json(categories);
+        }
         [HttpGet("{categoryId}")]
         public async Task<IActionResult> Get(Guid categoryId)
         {

@@ -3,6 +3,7 @@ using EComerence.Infrastructure.DTO;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace EComerence.Infrastructure.Services
     {
         Task<ProductDto> GetAsync(Guid id);
         Task<ProductDto> GetAsync(string email);
+        Task<FileStream> GetPhotoAsync(Guid id);
 
 
         Task<IEnumerable<ProductDto>> BrowseAsync(string name = null);

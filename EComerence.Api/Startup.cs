@@ -54,6 +54,7 @@ namespace EComerence.Api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOrderListRepository, OrderListRepository>();
             services.AddScoped<IProducerRepository, ProducerRepository>();
+            services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();

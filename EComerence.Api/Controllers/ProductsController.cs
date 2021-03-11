@@ -45,22 +45,33 @@ namespace EComerence.Api.Controllers
             }
             return Json(@product);
         }
-        [HttpGet("{Category}/{categoryId}")]
-        public async Task<IActionResult> Get(Guid categoryId, string Category)
+        [Route("Image/{productId}")]
+        [HttpGet]
+        public async Task<IActionResult> Get(Guid productId,bool a)
+        {
+            var @image = await _productService.GetPhotoAsync(productId);
+            if (@image == null )
+            {
+                return NotFound();
+            }
+            return File(@image, "image/jpeg");
+        }
+        [HttpGet("Category/{categoryId}")]
+        public async Task<IActionResult> Get(Guid categoryId, byte b)
         {
             var @product = await _productService.BrowseAsyncInCategory(categoryId);
-            if (@product == null || Category != "Category")
+            if (@product == null )
             {
                 return NotFound();
             }
             return Json(@product);
         }
         [HttpPost]
-        public async Task<IActionResult> UploadFile([FromBody] AddProduct command)
+        public async Task<IActionResult> Post([FromBody] AddProduct command)
         {
             var Id = Guid.NewGuid();
             await _productService.AddAsync(Id, command.Name, command.Amount, command.Price, command.ProducerName, command.CategoryName,command.Description,command.BrandTag);
-            return Created($"/product/{Id}", null);
+            return Json(Id);
 
         }
         [HttpPut("{productId}")]

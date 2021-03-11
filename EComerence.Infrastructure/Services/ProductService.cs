@@ -20,13 +20,15 @@ namespace EComerence.Infrastructure.Services
         private readonly IProductRepository _productRepository;
         private readonly IProducerRepository _producerRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IFileRepository _fileRepository;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository, IProducerRepository producerRepository, ICategoryRepository categoryRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IProducerRepository producerRepository, ICategoryRepository categoryRepository,IFileRepository fileRepository, IMapper mapper)
         {
             _productRepository = productRepository;
             _producerRepository = producerRepository;
             _categoryRepository = categoryRepository;
+            _fileRepository = fileRepository;
             _mapper = mapper;
         }
         public async Task<ProductDto> GetAsync(Guid id)
@@ -38,6 +40,13 @@ namespace EComerence.Infrastructure.Services
         {
             var @product = await _productRepository.GetAsync(name);
             return _mapper.Map<ProductDto>(@product);
+
+        }
+        public async Task<FileStream> GetPhotoAsync(Guid id)
+        {
+            var @product = await _productRepository.GetAsync(id);
+            var @image = await _fileRepository.GetAsync(product.ImageLocation);
+            return image;
 
         }
         public async Task<IEnumerable<ProductDto>> BrowseAsync(string name = null)
@@ -71,24 +80,25 @@ namespace EComerence.Infrastructure.Services
             @product.SetPrice(price);
             await _productRepository.UpdateAsync(@product);
         }
-        //TODO: Add proper Image repository
+
         public async Task AddPhotoAsync(string path, Guid id, IFormFile photo)
         {
-            int width=0;
             var @product = await _productRepository.GetOrFailAsync(id);
-            var productImage = SixLabors.ImageSharp.Image.Load(photo.OpenReadStream());
+            int width=0;           
+            var productImage = Image.Load(photo.OpenReadStream());
             int div = productImage.Height / 512;
             int hight = productImage.Height / div;
             if (productImage.Height < 2 * productImage.Width) width = 1024;
             else width = productImage.Width / div;
             productImage.Mutate(x => x.Resize(width,hight));
-            await productImage.SaveAsPngAsync(Path.Combine(path + "\\uploads\\" + product.Id+".png"));
+            await _fileRepository.AddAsync(productImage, path, product.Id);           
             @product.SetImageLocation(Path.Combine(path + "\\uploads\\" + product.Id+".png"));
             await _productRepository.UpdateAsync(@product);
         }
         public async Task DeleteAsync(Guid id)
         {
             var @product = await _productRepository.GetOrFailAsync(id);
+            await _fileRepository.DeleteAsync(product.ImageLocation);
             await _productRepository.DeleteAsync(@product);
         }
 

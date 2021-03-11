@@ -17,6 +17,7 @@ namespace EComerence.Infrastructure.Mappers
                 cfg.CreateMap<Product, ProductDto>();
                 cfg.CreateMap<Producer, ProducerDto>();
                 cfg.CreateMap<Category, CategoryDto>();
+                cfg.CreateMap<Category, CategoryTreeDto>();
                 cfg.CreateMap<OrderList, OrderListDto>();
                 cfg.CreateMap<Order, OrderDto>();
             })

@@ -1,42 +1,31 @@
 <template>
-  <v-hover>    
-    <template v-slot:default="{ hover }">
-      <v-card
-        :elevation="hover ? 24 : 6"
-        class="mx-auto my-12"
-        max-width="344"
-        outlined
-      >
-        <v-list-item three-line>
-          <v-list-item-content>
-            <div class="overline mb-4">
-              {{product.name}}
-            </div>
-            <v-list-item-title class="headline mb-1">
-              {{product.producerName}}
-            </v-list-item-title>
-            <v-list-item-subtitle>{{product.description}}</v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-avatar
-            tile
-            size="80"
-            color="grey"
-          ></v-list-item-avatar>
-        </v-list-item>
-
-        <v-card-actions>
-          <v-btn
-            outlined
-            rounded
-            text
+  <v-hover>
+      <template v-slot:default="{ hover }">
+        <v-card class="mx-auto" width="400" :elevation="hover ? 24 : 6">
+          <v-img
+            class="white--text align-end"
+            max-height="200px"
+            :src="'https://localhost:44367/Products/Image/' + product.id"
           >
-            {{product.price}}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </template>
-  </v-hover>
+            <v-card-title>{{ product.name }}</v-card-title>
+          </v-img>
+
+          <v-card-subtitle class="pb-0">
+            {{ product.producerName }}
+          </v-card-subtitle>
+
+          <v-card-text class="text--primary">
+            <div>{{ product.description }}</div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn outlined rounded color="orange" text> Share </v-btn>
+
+            <v-btn color="orange" text> Explore </v-btn>
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-hover>
 </template>
 <script>
 export default {
