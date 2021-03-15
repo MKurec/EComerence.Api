@@ -80,15 +80,15 @@ namespace EComerence.Api.Controllers
             await _productService.UpdateAsync(productId, command.Description, command.Price,command.Amount);
             return NoContent();
         }
-        [HttpPut("AddPhoto/{productId}")]
-        public async Task<IActionResult> Put(Guid productId, FIleUploadAPI file)
+        [HttpPost("AddPhoto/{productId}")]
+        public async Task<string> UploadFile(Guid productId,[FromHeader] FIleUploadAPI file)
         {
-            if(file.photo.Length > 0)
+            if(file.photo.ToString().Length > 0)
             {
                 string path = _environment.WebRootPath.ToString();
                 await _productService.AddPhotoAsync(path, productId, file.photo);
             }
-            return NoContent();
+            return "0";
 
         }
         [HttpDelete("{productId}")]

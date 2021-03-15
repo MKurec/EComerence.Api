@@ -1,22 +1,25 @@
 
 <template>
   <ul class="flex flex-col lg:flex-row gap-10">
-    <v-col style="min-width: 200px;" >
-    <v-treeview style="max-width:201px;"
-      :active.sync="active"
-      activatable
-      :items="items"
-      item-children="subCategories"
-      return-object
-    ></v-treeview>
+    <v-col style="min-width: 200px">
+      <v-treeview
+        style="max-width: 201px"
+        :active.sync="active"
+        activatable
+        :items="items"
+        item-children="subCategories"
+        return-object
+      ></v-treeview>
     </v-col>
-    <div class="flex flex-wrap gap-4">
-      <Product
-        v-for="product in products"
-        :product="product"
-        :key="product.name"
-      />
-    </div>
+    <v-pagination v-model="page" :total-visible="7">
+      <div class="flex flex-wrap gap-4">
+        <Product
+          v-for="product in products"
+          :product="product"
+          :key="product.name"
+        />
+      </div>
+    </v-pagination>
   </ul>
 </template>
 
@@ -27,6 +30,7 @@ export default {
       products: [],
       items: [],
       active: [],
+      page: 1,
     };
   },
   watch: {
@@ -45,9 +49,9 @@ export default {
     },
   },
   async fetch() {
-    this.items = await fetch("https://localhost:44367/Categories/Tree").then((res) =>
-      res.json()
-    );
+    this.items = await fetch(
+      "https://localhost:44367/Categories/Tree"
+    ).then((res) => res.json());
   },
 };
 </script> 

@@ -2,13 +2,13 @@
   <v-card class="overflow-hidden" color="teal lighten-5">
     <v-toolbar flat color="teal lighten-2">
       <v-toolbar-title class="font-weight-light">
-        Dodaj produkt {{ productid}}
+        Dodaj produkt {{ productid }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-card-text>
       <v-text-field
-        v-model="product.name"
+        v-model="productid"
         color="black"
         label="Nazwa"
       ></v-text-field>
@@ -50,7 +50,6 @@
       <v-file-input
         v-model="photo"
         label="Dodaj Zdjęcie"
-        filled
         accept="image/png, image/jpeg, image/bmp"
         prepend-icon="mdi-camera"
       ></v-file-input>
@@ -58,7 +57,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="success" @click="addProduct"> Dodaj </v-btn>
+      <v-btn color="success" @click="addPhoto"> Dodaj </v-btn>
     </v-card-actions>
     <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
       Your profile has been updated
@@ -71,6 +70,8 @@ export default {
     return {
       hasSaved: false,
       model: null,
+      photo: null,
+      productid: "",
       brandTags: ["premium", "medium", "budget"],
       product: {
         name: "",
@@ -81,7 +82,6 @@ export default {
         description: "",
         brandTag: "",
       },
-
     };
   },
 
@@ -106,27 +106,32 @@ export default {
           categoryName: this.product.categoryName,
           description: this.product.description,
           brandTag: this.product.brandTag,
-        }).then((response) => {
-          this.productid =response.data
-          this.addPhoto();
-        }).catch((error) => {
-          console.log(error);
         })
-        
+        .then((response) => {
+          this.productid = response.data;
+          this.addPhoto();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    async addPhoto(){
-      await this.$axios
-        .post("https://localhost:44367/Products/AddPhoto/"+this.productid,this.photo)
-    }
+    async addPhoto() {
+      const fd = new FormData();
+      if (this.photo) {
+        fd.append("photo", this.photo, this.photo.name);
+        await this.$axios
+          .post(
+            "https://localhost:44367/Products/AddPhoto/" + this.productid,
+             fd ,
+            { headers: { "Content-Type": "multipart/form-data" } }
+          );
+      }
+    },
   },
   async asyncData({ $axios }) {
     var categories = await $axios.$get("https://localhost:44367/Categories");
     var producers = await $axios.$get("https://localhost:44367/Producers");
     return { producers, categories };
-  },
-  compute: {
-    productid: "",
-    photo: [],
   },
 };
 </script>
