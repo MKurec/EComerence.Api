@@ -12,6 +12,7 @@ namespace EComerence.Core
         IProducerRepository Producers { get;}
         ICategoryRepository Categories { get; }
         IOrderListRepository OrderLists { get; }
+        IOrderRepository Order { get; }
         int Complete();
     }
 }

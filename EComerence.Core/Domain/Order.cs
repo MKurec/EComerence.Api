@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EComerence.Core.Domain
 {
     public class Order : Entity
     {
+        [ForeignKey("OrderListId")]
         public Guid OrderListId { get; protected set; }
+        public OrderList OrderList { get; protected set; }
         public Guid ProductId { get; protected set; }
         public string ProductName { get; protected set; }
         public int Amount { get; protected set; }
@@ -14,10 +17,11 @@ namespace EComerence.Core.Domain
 
         protected Order() { }
 
-        public Order(Guid id,Guid orderListId,Guid productId,string productName, decimal price  , int amount)
+        public Order(Guid id, OrderList orderList,Guid productId,string productName, decimal price  , int amount)
         {
             Id = id;
-            OrderListId = orderListId;
+            OrderListId = orderList.Id;
+            OrderList = orderList;
             ProductId = productId;
             ProductName = productName;
             Amount = amount;

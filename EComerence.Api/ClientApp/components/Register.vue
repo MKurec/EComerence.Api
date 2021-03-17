@@ -103,7 +103,6 @@ export default {
   },
   methods: {
     async registerUser() {
-       //await this.$axios.post('https://localhost:44367/Users/register', {data: this.register })
         await this.$axios.post('https://localhost:44367/Users/register', {
           firstName: this.register.firstName,
           lastName: this.register.lastName,

@@ -20,7 +20,9 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@fortawesome/fontawesome-free/css/all.css'
   ],
+  
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -85,7 +87,10 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    icons: {
+      iconfont: 'fas',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

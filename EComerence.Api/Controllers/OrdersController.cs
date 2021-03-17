@@ -22,6 +22,10 @@ namespace EComerence.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var orders = await _orderListService.BrowseAsync(UserId);
+            if (orders == null)
+            {
+                return NotFound();
+            }
             return Json(orders);
         }
         [Authorize]
@@ -40,7 +44,7 @@ namespace EComerence.Api.Controllers
         public async Task<IActionResult> Post([FromBody]AddOrder command)
         {
             var Id = Guid.NewGuid();
-            await _orderListService.AddOrderAsync(UserId,command.ProductId,command.Amount );
+            await _orderListService.AddOrderAsync(Id,UserId,command.ProductId,command.Amount );
             return Created($"/orders/{Id}", null);
 
         }

@@ -36,7 +36,8 @@ namespace EComerence.Infrastructure.Repositories
         public async Task UpdateAsync(OrderList @orderList)
         {
             Context.Entry(@orderList).State = EntityState.Modified;
-            Context.SaveChanges();
+            //Context.Entry(orderList.Orders).State = EntityState.Added;
+            await Context.SaveChangesAsync();
             await Task.CompletedTask;
 
         }
@@ -50,7 +51,7 @@ namespace EComerence.Infrastructure.Repositories
 
         public async Task<IEnumerable<OrderList>> BrowseAsync(Guid userId)
         {
-            var xOdrerLists = orderLists.AsEnumerable();
+            var xOdrerLists = orderLists.Include(x => x.Orders).AsEnumerable();
             xOdrerLists = xOdrerLists.Where(x => x.UserId == userId);
             return await Task.FromResult(xOdrerLists);
         }

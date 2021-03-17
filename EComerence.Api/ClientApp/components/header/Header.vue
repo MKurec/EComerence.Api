@@ -14,8 +14,14 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
+    <v-btn icon v-if="$auth.loggedIn">
+      <v-badge
+          color="orange"
+          content="6"
+        >
+        
+      <v-icon>fas fa-shopping-basket</v-icon>
+      </v-badge>
     </v-btn>
 
     <v-btn icon v-if="$auth.loggedIn" @click="logout">

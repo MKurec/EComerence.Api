@@ -19,6 +19,7 @@ namespace EComerence.Infrastructure.Repositories
             Categories = new CategoryRepository(_context);
             OrderLists = new OrderListRepository(_context);
 
+
         }
 
         public IProducerRepository Producers { get; private set; }
@@ -26,6 +27,7 @@ namespace EComerence.Infrastructure.Repositories
         public IProductRepository Products  { get; private set; }
         public ICategoryRepository Categories { get; private set; }
         public IOrderListRepository OrderLists { get; private set; }
+        public IOrderRepository Order { get; private set; }
 
 
         public int Complete()

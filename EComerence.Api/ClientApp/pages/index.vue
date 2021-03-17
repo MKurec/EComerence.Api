@@ -1,9 +1,10 @@
 
 <template>
   <ul class="flex flex-col lg:flex-row gap-10">
-    <v-col style="min-width: 200px">
+    <v-col style="max-width: 200px " flex-grow=0>
+      
       <v-treeview
-        style="max-width: 201px"
+        style="min-width: 199px"
         :active.sync="active"
         activatable
         :items="items"
@@ -11,15 +12,20 @@
         return-object
       ></v-treeview>
     </v-col>
-    <v-pagination v-model="page" :total-visible="7">
-      <div class="flex flex-wrap gap-4">
-        <Product
-          v-for="product in products"
-          :product="product"
-          :key="product.name"
-        />
-      </div>
-    </v-pagination>
+    <v-col flex-grow=1>
+      <v-row><div class="flex flex-wrap gap-4 " flex-grow=1>
+          <Product
+            v-for="product in products"
+            :product="product"
+            :key="product.name"
+          />
+        </div></v-row>
+      
+        
+      
+
+      <v-row class="align-content-center"><v-pagination :total-visible="7" > </v-pagination></v-row>
+    </v-col>
   </ul>
 </template>
 

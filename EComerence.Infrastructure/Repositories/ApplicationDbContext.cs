@@ -6,11 +6,12 @@ using System.Text;
 
 namespace EComerence.Infrastructure.Repositories
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext : DbContext
     {
         const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=EComerence;Trusted_Connection=True;";
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
         }
 
 
@@ -38,7 +39,15 @@ namespace EComerence.Infrastructure.Repositories
                       .HasForeignKey(x => x.ParentId)
                       .IsRequired(false)
                       .OnDelete(DeleteBehavior.Restrict);
-            }); 
-         }
+            });
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasOne(x => x.OrderList)
+                      .WithMany(x => x.Orders)
+                      .IsRequired();
+
+
+            });
+        }
     }
 }

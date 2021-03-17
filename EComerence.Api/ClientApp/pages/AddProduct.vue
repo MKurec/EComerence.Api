@@ -8,7 +8,7 @@
     </v-toolbar>
     <v-card-text>
       <v-text-field
-        v-model="productid"
+        v-model="product.name"
         color="black"
         label="Nazwa"
       ></v-text-field>
@@ -57,7 +57,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="success" @click="addPhoto"> Dodaj </v-btn>
+      <v-btn color="success" @click="addProduct"> Dodaj </v-btn>
     </v-card-actions>
     <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
       Your profile has been updated

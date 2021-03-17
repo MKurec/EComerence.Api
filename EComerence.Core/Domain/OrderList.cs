@@ -30,16 +30,9 @@ namespace EComerence.Core.Domain
             CreatedAt = DateTime.UtcNow;
         }
 
-        public void AddOrder(Product product, int amount)
+        public void AddOrder(Order order)
         {
-            if( _orders.Where(x => x.ProductId == product.Id).Count() > 0 )
-            {
-                var order = _orders.SingleOrDefault(x => x.ProductId == product.Id);
-                var orderAmount = order.Amount;
-                order.UpdateAmmout(amount+orderAmount);
-            }
-
-            else _orders.Add(new Order(Guid.NewGuid(),this.Id, product.Id,product.Name, product.Price, amount));
+                _orders.Add(order);
         }
         public void RemoveOrder(Guid orderId)
         {
