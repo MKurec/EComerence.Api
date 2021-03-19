@@ -29,15 +29,15 @@ namespace EComerence.Api.Controllers
             return Json(orders);
         }
         [Authorize]
-        [HttpGet("{orderListId}")]
+        [HttpGet("OrderList/{orderListId}")]
         public async Task<IActionResult> Get(Guid orderListId)
         {
-            var @order = await _orderListService.BrowseOrdersAsync(orderListId);
-            if (@order == null)
+            var @orderList = await _orderListService.GetAsync(orderListId);
+            if (@orderList == null)
             {
                 return NotFound();
             }
-            return Json(@order);
+            return Json(@orderList);
         }
         [Authorize]
         [HttpPost]

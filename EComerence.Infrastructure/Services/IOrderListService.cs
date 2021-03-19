@@ -10,7 +10,7 @@ namespace EComerence.Infrastructure.Services
     public interface IOrderListService 
     {
         Task<OrderListDto> GetAsync(Guid id);
-        Task<IEnumerable<OrderDto>> BrowseAsync(Guid orderId);
+        Task<OrderListDto> BrowseAsync(Guid orderId);
         Task<IEnumerable<OrderListDto>> BrowseAllAsync(Guid userId);
         Task<IEnumerable<OrderDto>> BrowseOrdersAsync(Guid orderListId);
         Task AddAsync(Guid id, Guid userId);

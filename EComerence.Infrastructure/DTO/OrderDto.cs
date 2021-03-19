@@ -8,7 +8,7 @@ namespace EComerence.Infrastructure.DTO
     {
         public Guid Id { get; set; }
 
-        public Guid UserId { get;  set; }
+        public Guid OrderListId { get;  set; }
 
         public Guid ProductId { get;  set; }
 

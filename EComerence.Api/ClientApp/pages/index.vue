@@ -1,8 +1,7 @@
 
 <template>
   <ul class="flex flex-col lg:flex-row gap-10">
-    <v-col style="max-width: 200px " flex-grow=0>
-      
+    <v-col style="max-width: 200px" flex-grow="0">
       <v-treeview
         style="min-width: 199px"
         :active.sync="active"
@@ -12,19 +11,19 @@
         return-object
       ></v-treeview>
     </v-col>
-    <v-col flex-grow=1>
-      <v-row><div class="flex flex-wrap gap-4 " flex-grow=1>
+    <v-col flex-grow="1">
+      <v-row
+        ><div class="flex flex-wrap gap-4" flex-grow="1">
           <Product
             v-for="product in products"
             :product="product"
-            :key="product.name"
-          />
-        </div></v-row>
-      
-        
-      
+            :key="product.id"
+          /></div
+      ></v-row>
 
-      <v-row class="align-content-center"><v-pagination :total-visible="7" > </v-pagination></v-row>
+      <v-row class="align-content-center"
+        ><v-pagination :total-visible="7"> </v-pagination
+      ></v-row>
     </v-col>
   </ul>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <v-hover>
+  <v-hover>    
     <template v-slot:default="{ hover }">
       <v-card class="mx-auto" width="400" :elevation="hover ? 10 : 4">
         <NuxtLink :to="'Product/' + product.id">
@@ -36,25 +36,33 @@
             color="orange"
             text
             v-if="!$auth.loggedIn"
-            v-bind="attrs"
-            v-on="on"
+            @click.stop="loginDialog=true"
           >
-            Zaloguj
+             Dodaj do koszyka
           </v-btn>
+          <Login v-model="loginDialog" />
           <v-spacer></v-spacer>
-          <v-btn color="orange" text disabled> {{ product.price }} </v-btn>
+          <v-btn  text disabled> {{ product.price }} zł </v-btn>
         </v-card-actions>
       </v-card>
     </template>
   </v-hover>
 </template>
 <script>
+import Login from './Login.vue';
 export default {
+  components: { Login },
   props: {
     product: {
       type: Object,
       default: () => {},
     },
+  },
+  data(){
+    return{
+      loginDialog: false,
+    }
+    
   },
   methods: {
     async addToOrder() {
@@ -62,7 +70,7 @@ export default {
         productId: this.product.id,
         amount: "1",
       });
-    },
+    }
   },
 };
 </script>

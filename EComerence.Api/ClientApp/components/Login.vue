@@ -1,11 +1,11 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-slot:activator="{ on, attrs }">
+       <!-- <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on">
           Zaloguj
         </v-btn>
-      </template>
+      </template>  -->
       <v-card>
         <v-card-title>
           <span class="headline">Zaloguj</span>
@@ -55,8 +55,11 @@ export default {
         password: ''
       },
       show1: false,
-      dialog: false,
+      //dialog: false,
     }
+  },
+  props: {
+     value: Boolean
   },
   methods: {
     async userLogin() {
@@ -67,6 +70,16 @@ export default {
         console.log(err)
       }
     }
+  },
+  computed: {
+    dialog: {
+      get () {
+        return this.value
+      },
+      set (value) {
+         this.$emit('input', value)
+      },
+    },
   }
 }
 </script>

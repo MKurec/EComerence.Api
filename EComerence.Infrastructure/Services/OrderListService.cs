@@ -17,7 +17,7 @@ namespace EComerence.Infrastructure.Services
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
-        public OrderListService(IOrderListRepository orderListRepository,IMapper mapper,IProductRepository productRepository,IOrderRepository orderRepository)
+        public OrderListService(IOrderListRepository orderListRepository, IMapper mapper, IProductRepository productRepository, IOrderRepository orderRepository)
         {
             _productRepository = productRepository;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace EComerence.Infrastructure.Services
             await _orderListRepository.AddAsync(@orderList);
         }
 
-        public async Task AddOrderAsync(Guid Id,Guid userId, Guid productId, int amount)
+        public async Task AddOrderAsync(Guid Id, Guid userId, Guid productId, int amount)
         {
             var @product = await _productRepository.GetAsync(productId);
             Guid orderListId;
@@ -40,23 +40,28 @@ namespace EComerence.Infrastructure.Services
             if (thisorderList == null)
             {
                 orderListId = Guid.NewGuid();
-                await AddAsync(orderListId, userId);               
+                await AddAsync(orderListId, userId);
             }
             else orderListId = thisorderList.Id;
 
             var @orderList = await _orderListRepository.GetAsync(orderListId);
-            if (orderList.Orders.Any(x => x.ProductId == product.Id)) 
+            if (orderList.Orders.Any(x => x.ProductId == product.Id))
             {
                 var @order = orderList.Orders.SingleOrDefault(x => x.ProductId == product.Id);
-                @orderList.UpdateOrder(order.Id,amount);
-                await _orderRepository.UpdateAsync(@order);
+                if (amount > 0)
+                {
+                    @orderList.UpdateOrder(order.Id, amount);
+                    await _orderRepository.UpdateAsync(@order);
+                }
+                else await DeleteOrderAsync(orderListId, order.Id);
             }
-            else
+            else if (amount > 0)
             {
                 var @order = new Order(Id, @orderList, productId, product.Name, product.Price, amount);
                 orderList.AddOrder(@order);
                 await _orderRepository.AddAsync(@order);
             }
+            else throw new Exception($"The amount must be greater than zero, amount: {amount}");
             await _orderListRepository.UpdateAsync(@orderList);
         }
 
@@ -72,12 +77,11 @@ namespace EComerence.Infrastructure.Services
             var orders = _mapper.Map<IEnumerable<OrderDto>>(orderList.Orders).ToList();
             return orders;
         }
-        public async Task<IEnumerable<OrderDto>> BrowseAsync(Guid userId)
+        public async Task<OrderListDto> BrowseAsync(Guid userId)
         {
             var orderLists = await _orderListRepository.BrowseAsync(userId);
             var orderList = orderLists.SingleOrDefault(x => x.Purchased == false);
-            var orders = _mapper.Map<IEnumerable<OrderDto>>(orderList.Orders).ToList();
-            return orders;
+            return _mapper.Map<OrderListDto>(@orderList);
         }
 
         public async Task DeleteAsync(Guid id)
@@ -90,6 +94,7 @@ namespace EComerence.Infrastructure.Services
         {
             var @orderList = await _orderListRepository.GetAsync(id);
             @orderList.RemoveOrder(orderId);
+            await _orderListRepository.UpdateAsync(@orderList);
         }
 
         public async Task<OrderListDto> GetAsync(Guid id)
