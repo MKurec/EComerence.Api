@@ -59,5 +59,11 @@ namespace EComerence.Core.Domain
             TotalPrice = totalPrice;
         }
 
+        public void PucharseProducts()
+        {
+            PucharsedAt = DateTime.UtcNow;
+            Purchased = true;
+        }
+
     }
 }

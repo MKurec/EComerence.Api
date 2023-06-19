@@ -102,5 +102,10 @@ namespace EComerence.Infrastructure.Services
             var @orderList = await _orderListRepository.GetOrFailAsync(id);
             return _mapper.Map<OrderListDto>(@orderList);
         }
+        public async Task SubmitOrder(Guid id)
+        {
+            var @orderList = await _orderListRepository.GetOrFailAsync(id);
+            orderList.PucharseProducts();
+        }
     }
 }
