@@ -2,7 +2,7 @@
 using LayeredExample.DataAccessLayer;
 
 
-string apiKey = "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";
+string apiKey = "";
 
 IChatbot chatbot = new Chatbot(apiKey);
 
