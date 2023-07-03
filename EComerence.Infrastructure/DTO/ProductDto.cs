@@ -14,6 +14,7 @@ namespace EComerence.Infrastructure.DTO
         public string CategoryName { get;  set; }
         public string Description { get; set; }
         public string BrandTag { get; set; }
+        public Guid? CopurchasedProductId { get;  set; }
 
 
     }

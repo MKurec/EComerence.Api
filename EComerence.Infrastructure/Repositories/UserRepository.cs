@@ -12,7 +12,7 @@ namespace EComerence.Infrastructure.Repositories
     public class UserRepository : IUserRepository
     {
         protected readonly DbContext Context;
-        private DbSet<User> _users;
+        protected DbSet<User> _users;
         public UserRepository(DbContext context)
         {
             this.Context = context;

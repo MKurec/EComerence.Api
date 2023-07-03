@@ -23,7 +23,7 @@ namespace EComerence.Infrastructure.Repositories
 
         public async Task<OrderList> GetAsync(Guid id)
         {
-            var @orderList = await Task.FromResult(Context.Set<OrderList>().Include(x => x.Orders).SingleOrDefault(x => x.Id == id));
+            var @orderList = await Task.FromResult(Context.Set<OrderList>().SingleOrDefault(x => x.Id == id));
             return @orderList;
         }
 
@@ -33,10 +33,9 @@ namespace EComerence.Infrastructure.Repositories
             Context.SaveChanges();
             await Task.CompletedTask;
         }
-        public async Task UpdateAsync(OrderList @orderList)
+        public async Task SaveAsync(OrderList @orderList)
         {
             Context.Entry(@orderList).State = EntityState.Modified;
-            //Context.Entry(orderList.Orders).State = EntityState.Added;
             await Context.SaveChangesAsync();
             await Task.CompletedTask;
 
@@ -46,14 +45,22 @@ namespace EComerence.Infrastructure.Repositories
             orderLists.Remove(@orderList);
             Context.SaveChanges();
             await Task.CompletedTask;
-
         }
 
         public async Task<IEnumerable<OrderList>> BrowseAsync(Guid userId)
         {
-            var xOdrerLists = orderLists.Include(x => x.Orders).AsEnumerable();
-            xOdrerLists = xOdrerLists.Where(x => x.UserId == userId);
-            return await Task.FromResult(xOdrerLists);
+            var OdrerLists = orderLists.AsEnumerable().Where(x => x.UserId == userId);
+            return await Task.FromResult(OdrerLists);
+        }
+      public async Task<IEnumerable<OrderList>> BrowseAllAsync()
+      {
+         var OdrerLists = orderLists.AsEnumerable();
+         return await Task.FromResult(OdrerLists);
+      }
+      public async Task<OrderList> GetCurrentOrderAsync(Guid userId)
+        {
+            var xOdrerList = orderLists.AsEnumerable().FirstOrDefault(x => x.UserId == userId && x.Purchased == false);
+            return await Task.FromResult(xOdrerList);
         }
     }
 }

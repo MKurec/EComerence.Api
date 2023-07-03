@@ -21,12 +21,26 @@ namespace EComerence.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var orders = await _orderListService.BrowseAsync(UserId);
+            var orders = await _orderListService.GetCurrentAsync(UserId);
             if (orders == null)
             {
                 return NotFound();
             }
             return Json(orders);
+        }
+        [Authorize]
+        [HttpPost("SumbitOrder")]
+        public async Task<IActionResult> SumbitOrder()
+        {
+            try
+            {
+                await _orderListService.SubmitOrder(UserId);
+                return Ok("Order submitted successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while submitting the order");
+            }
         }
         [Authorize]
         [HttpGet("OrderList/{orderListId}")]
@@ -43,9 +57,8 @@ namespace EComerence.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AddOrder command)
         {
-            var Id = Guid.NewGuid();
-            await _orderListService.AddOrderAsync(Id,UserId,command.ProductId,command.Amount );
-            return Created($"/orders/{Id}", null);
+            await _orderListService.AddOrderAsync(UserId,command.ProductId,command.Amount );
+            return Created($"/orders/", null);
 
         }
         [Authorize]

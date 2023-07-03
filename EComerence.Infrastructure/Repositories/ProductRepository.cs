@@ -1,6 +1,7 @@
 ﻿using EComerence.Core.Domain;
 using EComerence.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,10 @@ namespace EComerence.Infrastructure.Repositories
             Context.SaveChanges();
             await Task.CompletedTask;
 
+        }
+        public async Task UpdateBulkAsync(IEnumerable<Product> products)
+        {
+            await Context.BulkUpdateAsync(products);
         }
         public async Task DeleteAsync(Product @product)
         {

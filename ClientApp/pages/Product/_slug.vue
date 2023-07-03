@@ -69,9 +69,9 @@
                   color="orange"
                   text
                   v-if="!$auth.loggedIn"
-                  @click.stop="loginDialog=true"
+                  @click.stop="loginDialog = true"
                 >
-                  Dodaj do koszyka 
+                  Dodaj do koszyka
                 </v-btn>
                 <Login v-model="loginDialog" />
               </v-list-item-content>
@@ -94,44 +94,19 @@
         ></v-textarea>
       </v-container>
     </v-card-text>
-    <v-sheet
-    class="mx-auto"
-    elevation="8"
-  >
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item
-        v-for="n in 15"
-        :key="n"
-      >
-        <v-card
-          :color="active ? undefined : 'grey lighten-1'"
-          class="ma-4"
-          height="200"
-          width="300"
-        >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <v-scale-transition>
-              <v-icon
-                v-if="active"
-                color="white"
-                size="48"
-                v-text="'mdi-close-circle-outline'"
-              ></v-icon>
-            </v-scale-transition>
-          </v-row>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-sheet>
+    <v-sheet elevation="8">
+      <h2 class="text-center pt-5">You may also want</h2>
+
+      <v-slide-group v-model="model" active-class="success" show-arrows>
+        <v-slide-item v-for="n in 3" :key="n" class="ml-5">
+          <Product
+            :product="recomendedProduct"
+            :key="recomendedProduct.id"
+            class="ma-5"
+          />
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
   </v-card>
 </template>
 <script>
@@ -140,14 +115,16 @@ export default {
     const product = await $axios.$get(
       "https://localhost:44367/Products/" + params.slug
     );
-    return { product };
+    const recomendedProduct = await $axios.$get(
+      "https://localhost:44367/Products/" + product.copurchasedProductId
+    );
+    return { product, recomendedProduct };
   },
-  data(){
-    return{
+  data() {
+    return {
       loginDialog: false,
       model: null,
-    }
-    
+    };
   },
 };
 </script>

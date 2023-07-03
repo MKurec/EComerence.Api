@@ -1,0 +1,123 @@
+-Chose products from list bellow , take in account number of days of event (list clothes for every day), gender, budget and price preferences of user (don't list male clothes for female). List full clothing and necessary accessories for user. Clothes and accessories should be suitable for given occasion. 
+-Provide me with a list of clothes and accessories in JSON format :( { 
+"id":"GUID",
+"name":"product name",
+"ammount":"int"
+} )
+-Don't take previous user messages in to account. 
+Id	Name	Price	CategoryName	Description	BrandTag
+D75AD9F9-8A6B-4072-BFE2-029244CBF444	 Blazer 1	119.99	Blazers	Comfortable medium-priced blazer for versatile styling.	standard
+256BE142-7ABB-4C28-AD2C-0548201F90D8	 Trousers 1	69.99	Polo Shirts	Comfortable medium-priced trousers for everyday use.	standard
+C5260CC0-1D64-4097-A7C1-06A08C7424A4	 Belt 1	39.99	Belts	Comfortable medium-priced belt for everyday use.	standard
+7BED7FDE-5B90-41F1-9344-0AC8477DA09A	 Skirt 1	49.99	Jeans	Comfortable medium-priced skirt for everyday wear.	standard
+BB12EA3D-29D6-42C5-B91D-0D514C604C91	 Hat 1	29.99	Hats	Comfortable medium-priced hat for casual wear.	standard
+E78C79A1-06EA-408F-97EF-0EC8DF3E2FCA	Luxury Hat 1	39.99	Hats	Premium high-quality hat for a stylish accessory.	premium
+39E42AF9-6DAA-48B1-908B-0EF12F9F4CC2	 Dress 2	119.99	Flannel Shirts	Stylish medium-priced dress for a fashionable ensemble.	standard
+AB3153E4-30E8-46CC-BE4E-0F81BEE37457	 Boots 2	119.99	Boots	Stylish medium-priced boots for fashionable outfits.	standard
+ED0C577E-82C0-467C-9E17-13E068369ADE	Luxury Trousers 1	99.99	Polo Shirts	Premium high-quality trousers for a sleek look.	premium
+0D3FD64E-85FA-4379-8C01-14153673EAE1	 Sandals 1	59.99	Sandals	Comfortable medium-priced sandals for casual outings.	standard
+FBAC9CE9-4224-4F02-82AA-14427638FDFD	 Formal Suit 2	229.99	Formal Suits	Stylish medium-priced formal suit for a polished look.	standard
+7E04B0AC-D9BD-4C04-B1B0-162A5DAEECEC	Affordable Jacket 1	59.99	Chinos	Affordable budget-friendly jacket for everyday style.	budget
+6D76200F-8FE3-4504-A9C7-174A3D60B04B	Affordable Shirt 1	29.99	Turtleneck Shirts	Affordable budget-friendly shirt for casual occasions.	budget
+1EC76FAE-5792-478D-B04E-1D30318B2696	 Vest 1	69.99	Vests	Comfortable medium-priced vest for versatile use.	standard
+29ECE015-6441-488D-8797-200807D99658	Luxury Skirt 1	79.99	Skirts	Premium high-quality skirt for a fashionable look.	premium
+55EE80CE-EAD3-46C7-89AC-208C4F0DC504	Affordable Vest 1	49.99	Vests	Affordable budget-friendly vest for everyday elegance.	budget
+FFADAE3C-1646-42B3-A804-2091FEE3B61A	 Sandals 2	69.99	Sandals	Stylish medium-priced sandals for a trendy look.	standard
+31ACBE6D-C405-4949-89AF-2434A21C176A	Luxury Dress 2	119.99	Dresses	Beautiful premium dress for parties.	premium
+BFDC501F-A040-4565-8B5A-25C31C87F296	Luxury Sneakers 2	149.99	Sneakers	Luxurious premium sneakers with a fashionable design.	premium
+74C1CDC8-DDE1-48F1-8D3F-272F217F9861	 Hat 2	34.99	Hats	Stylish medium-priced hat for a trendy look.	standard
+AEB720C0-0B36-4273-BC73-2894B7B60B62	Luxury Wallet 2	94.99	Button-up Shirts	Luxurious premium wallet with fine craftsmanship.	premium
+73D473C3-F19F-487C-BC23-2B87D75B77C6	Luxury Sandals 1	89.99	Sandals	Premium high-quality sandals for summer elegance.	premium
+42ED9779-1787-4ED9-AD5B-2CBFED329C91	Affordable Watch 1	79.99	Jewelry	Affordable budget-friendly watch for reliable timekeeping.	budget
+79A84766-E965-41F0-BAF5-2E62D00A1F79	Luxury Jacket 2	149.99	Chinos	Luxurious premium jacket with intricate detailing.	premium
+734CC90B-62F0-45DC-AA16-2EF89E079765	 Jeans 1	59.99	Jeans	Comfortable medium-priced jeans for everyday wear.	standard
+71B82455-E57D-4E30-9700-2F373AD1F44D	Luxury Jeans 1	89.99	Jeans	Premium high-quality jeans with a perfect fit.	premium
+33AA5DF0-1A51-4F1C-B7A6-2FC8089B0209	Luxury Blazer 1	179.99	Blazers	Premium high-quality blazer for a polished appearance.	premium
+DBB5D9C9-61FC-47E1-AC69-2FF1AD0D1D9F	 Shirt 1	49.99	Turtleneck Shirts	Comfortable medium-priced shirt for everyday wear.	standard
+8DC389B8-C254-4511-A010-352AAC361C01	Luxury Casual Suit 1	249.99	Casual Suits	Premium high-quality casual suit for a refined appearance.	premium
+808C0362-B804-424E-B2B4-35EDCFF182B1	Luxury T-shirt 2	34.99	T-shirts	Luxurious premium t-shirt.	premium
+224EBBB0-3696-4E1A-A3FD-35F0057E0013	 Jeans 2	69.99	Jeans	Stylish medium-priced jeans with a modern look.	standard
+2DDE86F4-E8BF-4910-A34B-381B03A34748	 Watch 2	149.99	Jewelry	Stylish medium-priced watch for a sophisticated look.	standard
+46E669E3-48E0-4D94-B721-3A1754938478	Luxury Dress 1	99.99	Dresses	Elegant premium dress for special occasions.	premium
+D7AC9FE0-1BD6-458D-B7D7-3A544E4BADC1	Luxury Formal Suit 2	349.99	Formal Suits	Luxurious premium formal suit with impeccable tailoring.	premium
+72FF0863-4E21-44BF-BB86-3AAA46CC07EC	 T-shirt 2	22.99	T-shirts	Stylish medium-priced t-shirt.	standard
+99F61DBB-3AD0-4255-84F5-3EF32C2F5717	 Dress 1	69.99	Dresses	Stylish medium-priced dress for casual wear.	standard
+F225C3A2-1062-49D8-8D7C-400E0EEAD154	Luxury Shirt 1	79.99	Turtleneck Shirts	Premium high-quality shirt for a sophisticated look.	premium
+826AA96D-7DE7-485B-84C1-407788B573BC	Luxury Coat 1	199.99	Leggings	Premium high-quality coat for a sophisticated outerwear.	premium
+3919A6DD-CF0E-4424-BEBD-418E94F4F0E4	 Skirt 2	59.99	Jeans	Stylish medium-priced skirt for a trendy ensemble.	standard
+D105B44D-6509-4167-8F4C-426CCACD3851	Luxury Jeans 2	109.99	Jeans	Luxurious premium jeans with a trendy design.	premium
+4663902E-7693-4C3A-A43D-43FE6E3C86C7	 Vest 2	79.99	Vests	Stylish medium-priced vest for a trendy outfit.	standard
+94D86BAD-285D-467E-B9B0-522D1DC17398	Affordable Hat 1	19.99	Hats	Affordable budget-friendly hat for everyday style.	budget
+731946F6-C841-4167-8688-52D03A60C094	 Boots 1	109.99	Boots	Comfortable medium-priced boots for versatile use.	standard
+767E3E50-1BFB-426C-9304-55173B3B1988	 Heels 1	99.99	Heels	Comfortable medium-priced heels for formal occasions.	standard
+A9CD6098-99D2-4B1C-9BCE-555BC627CB3A	Luxury Skirt 1	79.99	Jeans	Premium high-quality skirt for a feminine look.	premium
+332A4891-3C63-433A-AF11-581827BCF9C2	 Coat 1	139.99	Leggings	Comfortable medium-priced coat for everyday wear.	standard
+46E58768-E128-4EA6-A2A9-58654E94C7B2	Affordable Trousers 1	49.99	Polo Shirts	Affordable budget-friendly trousers for casual styling.	budget
+F3634C92-F681-40C5-AB08-59459783F9A6	Luxury Heels 2	169.99	Heels	Luxurious premium heels with elegant detailing.	premium
+17852BCB-E675-4930-97D5-5AFB1A0B15AD	 Casual Suit 1	169.99	Casual Suits	Comfortable medium-priced casual suit for versatile use.	standard
+1AA3BB32-ED3E-42B0-8143-5FC7125CD8BC	Luxury Trousers 2	109.99	Polo Shirts	Luxurious premium trousers with impeccable tailoring.	premium
+8867AE4C-2E84-47C5-8162-60BD65EFBC50	 Trousers 2	79.99	Polo Shirts	Stylish medium-priced trousers for a trendy outfit.	standard
+7C8F1F90-3D1A-4F5E-A050-65F732A1AE61	Affordable Belt 1	24.99	Belts	Affordable budget-friendly belt for any outfit.	budget
+DEFB84B5-37A9-4D71-9B54-69351248FDDC	Luxury Sneakers 1	129.99	Sneakers	Premium high-quality sneakers for athletic performance.	premium
+A68E73D8-0CD1-467A-939E-6AFFCAAE0CC7	Luxury Heels 1	149.99	Heels	Premium high-quality heels for a sophisticated appearance.	premium
+B362DEE0-4ABC-48CA-86A3-722068FF12C2	Affordable Formal Suit 1	149.99	Formal Suits	Affordable budget-friendly formal suit for any formal gathering.	budget
+14B371C9-2DF0-4CBF-B3E8-77917C4FFE67	 Jacket 1	89.99	Chinos	Comfortable medium-priced jacket for versatile use.	standard
+7D081C23-AC19-4ABB-A95D-794CB7DC6B2D	Luxury Dress 2	169.99	Flannel Shirts	Luxurious premium dress with intricate detailing.	premium
+095D2503-F320-4592-AAB2-7C547A3F35B8	Premium Vest 1	99.99	Vests	Premium high-quality vest for a dapper look.	premium
+D81601DD-4488-446E-986A-7FD8414BC60F	Premium Sunglasses 1	89.99	Scarves	Premium high-quality sunglasses for a cool accessory.	premium
+C1B72363-5FB3-43DE-AB07-85DE923BEE5B	Premium Watch 1	199.99	Jewelry	Premium high-quality watch for a stylish accessory.	premium
+2E90A0A0-327E-4755-85C8-87769EA57DB1	Premium Dress 1	149.99	Flannel Shirts	Premium high-quality dress for an elegant look.	premium
+07A758FA-AB0C-4A9A-A705-878367AFD513	Budget T-shirt 1	9.99	T-shirts	Affordable budget-friendly t-shirt.	budget
+B3D55EFF-45AD-417D-9F07-8D16E2C1C492	Premium Sandals 2	99.99	Sandals	Luxurious premium sandals with a chic design.	premium
+115A3F36-BE59-4EF5-9518-8D8F65DC3E22	Budget Coat 1	89.99	Leggings	Affordable budget-friendly coat for any occasion.	budget
+01396DE7-06CF-4E33-97DC-8FEA9899B642	Premium Belt 1	49.99	Belts	Premium high-quality belt for a fashionable accessory.	premium
+2591DB9D-E311-456E-BA6B-90AB222B5E20	Premium Shirt 2	89.99	Turtleneck Shirts	Luxurious premium shirt with exquisite craftsmanship.	premium
+95D711DC-DCA5-4CCB-B0D6-9219A7DEC48B	Standard Dress 2	79.99	Dresses	Comfortable medium-priced dress for everyday use.	standard
+43F586C0-BA3B-40A4-93C0-948D3F80BC6F	Premium Skirt 2	89.99	Jeans	Luxurious premium skirt with a stylish design.	premium
+5BFC8178-0B22-48A0-B4F7-9649051A7328	Premium Watch 2	249.99	Jewelry	Luxurious premium watch with precise timekeeping.	premium
+567C6B68-2048-4AF4-99B8-A031922B21B7	Premium Boots 1	159.99	Boots	Premium high-quality boots for a stylish appearance.	premium
+F25A66AF-CAC0-4F92-A9E6-A6ED63E78574	Standard Dress 1	99.99	Flannel Shirts	Comfortable medium-priced dress for versatile styling.	standard
+62AE1DA2-6D58-4762-93C3-A752715D946F	Premium Wallet 1	79.99	Button-up Shirts	Premium high-quality wallet for a sleek accessory.	premium
+1EE80FA4-07CF-4ABF-9B1A-A945F6719E37	Premium Hat 2	49.99	Hats	Luxurious premium hat with fine craftsmanship.	premium
+370830B4-B4BF-4DEB-9255-A985CB29CB5F	Budget Sunglasses 1	39.99	Scarves	Affordable budget-friendly sunglasses for eye protection.	budget
+15434D0A-45E4-4F97-955A-AE3DC329FF33	Budget Casual Suit 1	119.99	Casual Suits	Affordable budget-friendly casual suit for everyday elegance.	budget
+13B37AD4-E5A1-48C7-9B5C-AF12396D28E5	Standard Watch 1	129.99	Jewelry	Comfortable medium-priced watch for everyday wear.	standard
+E2495904-2BEB-42B1-A621-B012C920320A	Premium Skirt 2	94.99	Skirts	Luxurious premium skirt with a unique design.	premium
+63D79ACC-9196-49E7-8C61-B266CF158EB1	Standard Shirt 2	59.99	Turtleneck Shirts	Stylish medium-priced shirt for a trendy ensemble.	standard
+8BABA6F6-1667-40A8-960B-B4D24745B47B	Budget Sneakers 1	59.99	Sneakers	Affordable budget-friendly sneakers for everyday wear.	budget
+09EDA39B-C361-4B26-9EE9-B5FDE6375474	Standard Skirt 1	49.99	Skirts	Comfortable medium-priced skirt for versatile styling.	standard
+04564E8B-A708-4907-B35F-B6FAC75EC8FC	Premium Formal Suit 1	299.99	Formal Suits	Premium high-quality formal suit for special events.	premium
+52538071-D9A6-46B3-8421-BBA0A76EDB59	Budget Sandals 1	39.99	Sandals	Affordable budget-friendly sandals for everyday comfort.	budget
+D32620D7-9942-4A47-B5F4-BC28074E9585	Standard Wallet 1	49.99	Button-up Shirts	Comfortable medium-priced wallet for everyday use.	standard
+7B6ABFFD-F466-4052-8729-BC74B3EB72C2	Standard Jacket 2	109.99	Chinos	Stylish medium-priced jacket for a trendy look.	standard
+CD5D647D-0B7D-45F3-9138-BDF5B970A01F	Standard Sneakers 1	89.99	Sneakers	Comfortable medium-priced sneakers for casual use.	standard
+83EBBDDE-8A56-467C-A4DF-BF8B9075B900	Standard Skirt 2	59.99	Skirts	Stylish medium-priced skirt with trendy patterns.	standard
+60B04B6A-66B0-4B42-B370-C3C717C52847	Budget Heels 1	69.99	Heels	Affordable budget-friendly heels for everyday wear.	budget
+A11A4B1F-E020-49CF-9518-C4E7CC9ACB91	Budget Blazer 1	89.99	Blazers	Affordable budget-friendly blazer for everyday sophistication.	budget
+5E245279-7E10-4F88-8845-C561B36EEA85	Premium Sunglasses 2	99.99	Scarves	Luxurious premium sunglasses with UV protection.	premium
+3C0ACF1E-A145-439C-BF54-C79CA165D86A	Standard Heels 2	109.99	Heels	Stylish medium-priced heels for a fashionable ensemble.	standard
+A4513467-BAD1-4269-8C33-C8F2DAEBAB52	Standard Sunglasses 1	59.99	Scarves	Comfortable medium-priced sunglasses for everyday use.	standard
+5F1F65C4-BA48-4861-84F3-C9AF1A211437	Budget Skirt 1	29.99	Skirts	Affordable budget-friendly skirt for everyday wear.	budget
+346A2FE1-F927-481C-AC18-CBAB2BA07A67	Standard Wallet 2	59.99	Button-up Shirts	Stylish medium-priced wallet for a trendy look.	standard
+105BC72B-3218-46BD-9D2D-D5573E5E5439	Premium T-shirt 1	29.99	T-shirts	High-quality premium t-shirt.	premium
+6FD4D1C9-FD77-4E28-B794-D583A81AA051	Standard T-shirt 1	19.99	T-shirts	Comfortable medium-priced t-shirt.	standard
+C60CCCDE-1565-4C16-B312-D817B9E633FB	Budget Wallet 1	29.99	Button-up Shirts	Affordable budget-friendly wallet for practical storage.	budget
+E09A824E-9A58-4AC9-95ED-D87F20D2C6BA	Premium Blazer 2	199.99	Blazers	Luxurious premium blazer with intricate detailing.	premium
+CDFFBB4A-5D2B-4F85-B1B8-DA96285E0131	Standard Sunglasses 2	69.99	Scarves	Stylish medium-priced sunglasses for a trendy look.	standard
+64123F4C-16FE-4B82-A58A-DBAA51492641	Budget Jeans 1	39.99	Jeans	Affordable budget-friendly jeans with a classic style.	budget
+0E629D97-F11B-4634-8F09-DC2087DBD99C	Standard Casual Suit 2	189.99	Casual Suits	Stylish medium-priced casual suit for a sophisticated look.	standard
+3AA03C91-A102-48EE-B8BE-DE3762F24427	Standard Belt 2	44.99	Belts	Stylish medium-priced belt for a trendy ensemble.	standard
+8D9F9767-3036-4667-B6BA-DF26AFA8D312	Budget Dress 1	49.99	Dresses	Affordable budget-friendly dress for any occasion.	budget
+BC29FDC7-2379-4A70-8BD1-E521326A8736	Standard Formal Suit 1	199.99	Formal Suits	Elegant medium-priced formal suit for professional occasions.	standard
+B63898E8-4768-429B-943B-E7355D2DF8E1	Premium Jacket 1	129.99	Chinos	Premium high-quality jacket for a fashionable outerwear.	premium
+A262E2E7-195F-48D6-B775-E758464D155D	Budget Boots 1	79.99	Boots	Affordable budget-friendly boots for everyday comfort.	budget
+AC27A937-8B55-49FE-B132-EC51CEFBF545	Standard Sneakers 2	99.99	Sneakers	Stylish medium-priced sneakers with a trendy look.	standard
+F01712A8-8190-4DE4-B898-ECB19A9238AF	Premium Belt 2	59.99	Belts	Luxurious premium belt with exquisite detailing.	premium
+94ADEB23-37EA-41AB-8305-F4C8BD3217D2	Premium Boots 2	179.99	Boots	Luxurious premium boots with excellent craftsmanship.	premium
+45C73E9D-447B-4AA1-A9D6-F797CF187C2F	Premium Coat 2	229.99	Leggings	Luxurious premium coat with exquisite craftsmanship.	premium
+75B29C14-4B67-4D83-B307-F7B6F68E4DC4	Standard Coat 2	159.99	Leggings	Stylish medium-priced coat for a fashionable ensemble.	standard
+91260CA3-CAC1-4BD2-AB2A-FB2830232EA7	Budget Dress 1	69.99	Flannel Shirts	Affordable budget-friendly dress for any occasion.	budget
+2836940F-64AB-45AB-A42C-FB7A6657655F	Standard Blazer 2	139.99	Blazers	Stylish medium-priced blazer for a fashionable ensemble.	standard
+401BF601-7DD3-46D1-8952-FBC1835EEFC0	Premium Casual Suit 2	289.99	Casual Suits	Luxurious premium casual suit with a modern twist.	premium
+9149AAFC-1BDD-413E-9D22-FC0A29AC28D5	Budget Skirt 1	29.99	Jeans	Affordable budget-friendly skirt for casual styling.	budget
+7BCE1AFB-36A4-400F-B167-FF6000D9D594	Premium Vest 2	119.99	Vests	Luxurious premium vest with a sleek design.	premium

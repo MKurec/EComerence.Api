@@ -11,7 +11,7 @@ namespace EComerence.Core.Repositories
     public interface IFileRepository
     {
         Task<FileStream> GetAsync(string path);
-        Task AddAsync(Image image,string path, Guid id);
+        Task AddAsync(Image image,string path);
 
         Task DeleteAsync(string path);
     }

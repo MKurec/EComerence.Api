@@ -6,8 +6,6 @@ namespace EComerence.Infrastructure.DTO
 {
     public class OrderDto
     {
-        public Guid Id { get; set; }
-
         public Guid OrderListId { get;  set; }
 
         public Guid ProductId { get;  set; }

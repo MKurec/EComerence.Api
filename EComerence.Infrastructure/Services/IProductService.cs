@@ -20,7 +20,7 @@ namespace EComerence.Infrastructure.Services
         Task<IEnumerable<ProductDto>> BrowseAsyncInCategory(Guid categoryId);
         Task AddAsync(Guid id, string name, int amount, decimal price, string producerName, string categoryName, string brandTag, string descryption);
         Task UpdateAsync(Guid id, string name, decimal price, int amount);
-        Task AddPhotoAsync(string path, Guid id, IFormFile photo);
+        Task AddPhotoAsync(Guid id, IFormFile photo);
         Task DeleteAsync(Guid id);
 
 

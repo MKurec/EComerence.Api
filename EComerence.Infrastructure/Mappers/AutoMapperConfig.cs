@@ -3,6 +3,7 @@ using EComerence.Core.Domain;
 using EComerence.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EComerence.Infrastructure.Mappers
@@ -18,9 +19,21 @@ namespace EComerence.Infrastructure.Mappers
                 cfg.CreateMap<Producer, ProducerDto>();
                 cfg.CreateMap<Category, CategoryDto>();
                 cfg.CreateMap<Category, CategoryTreeDto>();
-                cfg.CreateMap<OrderList, OrderListDto>();
-                cfg.CreateMap<Order, OrderDto>();
+                cfg.CreateMap<OrderList, OrderListDto>()
+                     .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => MapOrders(src.Orders,src.Id)));
             })
             .CreateMapper();
+
+        private static IEnumerable<OrderDto> MapOrders(Dictionary<Product, ushort> orders,Guid id)
+        {
+            return orders.Select(kvp => new OrderDto
+            {
+                OrderListId = id,
+                ProductId = kvp.Key.Id,
+                ProductName = kvp.Key.Name,
+                Amount = kvp.Value,
+                Price = kvp.Key.Price * kvp.Value
+            });
+        }
     }
 }

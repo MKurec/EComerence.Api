@@ -16,6 +16,7 @@ namespace EComerence.Core.Repositories
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(Product product);
+        Task UpdateBulkAsync(IEnumerable<Product> products);
     }
 }
 

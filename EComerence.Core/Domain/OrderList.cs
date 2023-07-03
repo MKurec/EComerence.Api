@@ -5,65 +5,77 @@ using System.Text;
 
 namespace EComerence.Core.Domain
 {
-    public class OrderList : Entity
-    {
-        private ICollection<Order> _orders = new HashSet<Order>();
+   public class OrderList : Entity
+   {
+      public Dictionary<Product, ushort> Orders = new();
 
-        public IEnumerable<Order> Orders => _orders;
+      public Guid UserId { get; protected set; }
 
-        public Guid UserId { get; protected set; }
+      public bool Purchased { get; protected set; }
 
-        public bool Purchased { get; protected set; }
+      public decimal TotalPrice { get; protected set; }
 
-        public decimal TotalPrice { get; protected set; }
+      public DateTime CreatedAt { get; protected set; }
 
-        public DateTime CreatedAt { get; protected set; }
+      public DateTime? PucharsedAt { get; protected set; }
 
-        public DateTime? PucharsedAt { get; protected set; }
+      protected OrderList() { }
 
-        protected OrderList() { }
+      public OrderList(Guid id, Guid userId)
+      {
+         Id = id;
+         UserId = userId;
+         CreatedAt = DateTime.UtcNow;
+      }
 
-        public OrderList(Guid id, Guid userId)
-        {
-            Id = id;
-            UserId = userId;
-            CreatedAt = DateTime.UtcNow;
-        }
-
-        public void AddOrder(Order order)
-        {
-            _orders.Add(order);
+      public void AddProduct(Product product, ushort ammount)
+      {
+         if (ContainsProduct(product))
+            UpdateOrder(product, ammount);
+         else
+         {
+            Orders.Add(product, ammount);
             SetTotalPrice();
+         }
 
-        }
-        public void RemoveOrder(Guid orderId)
-        {
-            var @order = _orders.SingleOrDefault(x => x.Id == orderId);
-            _orders.Remove(order);
-            SetTotalPrice();
+      }
+      public void RemoveProduct(Guid productId)
+      {
+         if (!Orders.Keys.Any(x => x.Id == productId))
+            return;
+         var productToRemove = Orders.Keys.FirstOrDefault(x => x.Id == productId);
+         Orders.Remove(productToRemove);
+         SetTotalPrice();
 
-        }
-        public void UpdateOrder(Guid orderId, int amount)
-        {
-            var @order = _orders.SingleOrDefault(x => x.Id == orderId);
-            @order.UpdateAmmout(amount);
-            SetTotalPrice();
-        }
-        public void SetTotalPrice()
-        {
-            decimal totalPrice = 0;
-            foreach (Order order in Orders)
-            {
-                totalPrice += order.Price;
-            }
-            TotalPrice = totalPrice;
-        }
+      }
+      public void UpdateOrder(Product product, ushort amount)
+      {
+         if (!ContainsProduct(product))
+            AddProduct(product, amount);
+         RemoveProduct(product.Id);
+         AddProduct(product, amount);
+         SetTotalPrice();
+      }
+      public bool ContainsProduct(Product product)
+      {
+         return Orders.Keys.Contains(product);
+      }
 
-        public void PucharseProducts()
-        {
-            PucharsedAt = DateTime.UtcNow;
-            Purchased = true;
-        }
+      public void SetTotalPrice()
+      {
+         decimal totalPrice = 0;
+         foreach (Product product in Orders.Keys)
+         {
+            totalPrice += product.Price * Orders[product];
+         }
+         TotalPrice = totalPrice;
+      }
 
-    }
+      public void PucharseProducts()
+      {
+         PucharsedAt = DateTime.UtcNow;
+         Purchased = true;
+      }
+
+   }
 }

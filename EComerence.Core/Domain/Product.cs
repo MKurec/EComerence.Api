@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace EComerence.Core.Domain
 {
@@ -8,7 +9,7 @@ namespace EComerence.Core.Domain
     {
         private static readonly List<string> _brandTags = new List<string>
         {
-            "premium", "medium ", "budget"
+            "premium", "standard ", "budget"
         };
 
         public string Name { get; protected set; }
@@ -20,8 +21,9 @@ namespace EComerence.Core.Domain
         public string Description { get; protected set; }
         public string ProducerName { get; protected set; }
         public string CategoryName { get; protected set; }
-        public string? ImageLocation { get; protected set; } 
+        public Guid? CopurchasedProductId { get; protected set; }
 
+        [JsonConstructor]
         public Product(Guid id, string name, int amount, decimal price, string producerName, Guid producerId, string categoryName, Guid categoryId, string description, string brandTag)
         {
             Id = id;
@@ -76,15 +78,10 @@ namespace EComerence.Core.Domain
             //}
             BrandTag = brandTag;
         }
-        public void SetImageLocation(String imageLocation)
+        public void SetCopurchasedProductId(Guid id)
         {
-            if (string.IsNullOrEmpty(imageLocation))
-            {
-                throw new Exception($"Product with imageLocation : '{imageLocation}' can not have empty image location");
-            }
-            ImageLocation = imageLocation;
+            CopurchasedProductId = id;
         }
-
 
 
     }

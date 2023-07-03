@@ -7,6 +7,6 @@ namespace EComerence.Infrastructure.Commands
     public class AddOrder
     {
         public Guid ProductId { get;  set; }
-        public int Amount { get;  set; }
+        public ushort Amount { get;  set; }
     }
 }

@@ -85,8 +85,7 @@ namespace EComerence.Api.Controllers
         {
             if(file.photo.ToString().Length > 0)
             {
-                string path = _environment.WebRootPath.ToString();
-                await _productService.AddPhotoAsync(path, productId, file.photo);
+                await _productService.AddPhotoAsync( productId, file.photo);
             }
             return "0";
 

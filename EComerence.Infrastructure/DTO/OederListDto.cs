@@ -19,6 +19,6 @@ namespace EComerence.Infrastructure.DTO
 
         public DateTime? PucharsedAt { get;  set; }
 
-        public IEnumerable<Order> Orders;
+        public IEnumerable<OrderDto> Orders;
     }
 }
