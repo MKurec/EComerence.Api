@@ -7,23 +7,17 @@ namespace EComerence.Core.Domain
 {
     public class Product :Entity
     {
-        private static readonly List<string> _brandTags = new List<string>
-        {
-            "premium", "standard ", "budget"
-        };
-
         public string Name { get; protected set; }
         public int Amount { get; protected set; }
         public decimal Price { get; protected set; }
         public Guid ProducerId { get; protected set; }
         public Guid CategoryId { get; protected set; }
-        public string? BrandTag { get; protected set; }
+        public BrandTags BrandTag { get; protected set; }
         public string Description { get; protected set; }
         public string ProducerName { get; protected set; }
         public string CategoryName { get; protected set; }
         public Guid? CopurchasedProductId { get; protected set; }
 
-        [JsonConstructor]
         public Product(Guid id, string name, int amount, decimal price, string producerName, Guid producerId, string categoryName, Guid categoryId, string description, string brandTag)
         {
             Id = id;
@@ -32,6 +26,21 @@ namespace EComerence.Core.Domain
             SetPrice(price);
             SetDescription(description);
             SetBrandTag(brandTag);
+            ProducerId = producerId;
+            ProducerName = producerName;
+            CategoryId = categoryId;
+            CategoryName = categoryName;
+        }
+        [JsonConstructor]
+
+        public Product(Guid id, string name, int amount, decimal price, string producerName, Guid producerId, string categoryName, Guid categoryId, string description, BrandTags brandTag)
+        {
+            Id = id;
+            SetName(name);
+            SetAmount(amount);
+            SetPrice(price);
+            SetDescription(description);
+            BrandTag = brandTag;
             ProducerId = producerId;
             ProducerName = producerName;
             CategoryId = categoryId;
@@ -67,16 +76,19 @@ namespace EComerence.Core.Domain
         }
         public void SetBrandTag(string brandTag)
         {
-            //if (string.IsNullOrWhiteSpace(brandTag))
-            //{
-            //    throw new Exception($"Product can not have an empty brand tag.");
-            //}
-            //brandTag = brandTag.ToLowerInvariant();
-            //if (!_brandTags.Contains(brandTag))
-            //{
-            //    throw new Exception($"Product can not have a brand tag: '{brandTag}'.");
-            //}
-            BrandTag = brandTag;
+            if (string.IsNullOrWhiteSpace(brandTag))
+            {
+                throw new Exception("Product cannot have an empty brand tag.");
+            }
+
+            brandTag = brandTag.ToLowerInvariant();
+
+            if (!Enum.TryParse<BrandTags>(brandTag, true, out var selectedBrandTag))
+            {
+                throw new Exception($"Invalid brand tag: {brandTag}.");
+            }
+
+            BrandTag = selectedBrandTag;
         }
         public void SetCopurchasedProductId(Guid id)
         {
@@ -84,5 +96,11 @@ namespace EComerence.Core.Domain
         }
 
 
+    }
+    public enum BrandTags
+    {
+        premium,
+        standard,
+        budget,
     }
 }

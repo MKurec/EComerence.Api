@@ -8,8 +8,7 @@ namespace EComerence.Core.Repositories
 {
     public interface IOrderRepository
     {
-        Task AddAsync(Order @order);
-        Task UpdateAsync(Order @order);
-        Task DeleteAsync(Order @order);
+        Task AddBulkAsync(IEnumerable<Order> order);
+        Task<IEnumerable<Order>> BrowseeAllAsync();
     }
 }

@@ -41,9 +41,10 @@ namespace ArtificialOrdersInput
                   ushort amount = order.GetProperty("amount").GetUInt16();
                   await _orderListService.AddOrderAsync((Guid)userId, productId, amount);
                }
+            await _orderListService.SubmitOrder((Guid)userId);
+
             }
 
-            await _orderListService.SubmitOrder((Guid)userId);
 
          }
       }

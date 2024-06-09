@@ -7,32 +7,25 @@ namespace EComerence.Core.Domain
 {
     public class Order : Entity
     {
-        [ForeignKey("OrderListId")]
-        public Guid OrderListId { get; protected set; }
-        public OrderList OrderList { get; protected set; }
+        public Guid UserId { get; protected set; }
         public Guid ProductId { get; protected set; }
-        public string ProductName { get; protected set; }
+        public string ProducerName { get; protected set; }
         public int Amount { get; protected set; }
-        public decimal ProductPrice { get; protected set; }
         public decimal Price { get; protected set; }
+        public BrandTags BrandTag { get; protected set; }
+        public bool Bought { get; protected set; }
 
         protected Order() { }
 
-        public Order(Guid id, OrderList orderList,Guid productId,string productName, decimal price  , int amount)
+        public Order(Guid userid, Guid productId, string productName, decimal price, int amount, BrandTags brandTag)
         {
-            Id = id;
-            OrderListId = orderList.Id;
-            OrderList = orderList;
+            UserId = userid;
             ProductId = productId;
-            ProductName = productName;
+            ProducerName = productName;
             Amount = amount;
-            ProductPrice = Convert.ToDecimal(price);
-            Price = Convert.ToDecimal(price* amount);
-        }
-        public void UpdateAmmout(int amount)
-        {
-            Price = Convert.ToDecimal(ProductPrice * amount);
-            Amount = amount;
+            Price = price;
+            BrandTag = brandTag;
+            Bought = true;
         }
     }
 }

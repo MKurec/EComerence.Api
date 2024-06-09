@@ -12,38 +12,23 @@ namespace EComerence.Infrastructure.Repositories
     public class OrderRepository : IOrderRepository
     {
         protected readonly DbContext Context;
-        private DbSet<Order> orders;
+        private DbSet<Order> _orders;
         public OrderRepository(DbContext context)
         {
             this.Context = context;
-            this.orders= Context.Set<Order>();
+            this._orders= Context.Set<Order>();
         }
 
 
-
- 
-
-        public async Task AddAsync(Order @order)
+        public async Task AddBulkAsync(IEnumerable<Order> orders)
         {
-            orders.Add(@order);
-            Context.SaveChanges();
-            await Task.CompletedTask;
+            await Context.BulkInsertAsync(orders);
         }
-        public async Task UpdateAsync(Order @order)
+
+        public async Task<IEnumerable<Order>> BrowseeAllAsync()
         {
-            Context.Entry(@order).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
-            await Task.CompletedTask;
-
+            var OdrerLists = _orders.AsEnumerable();
+            return await Task.FromResult(OdrerLists); ;
         }
-        public async Task DeleteAsync(Order @order)
-        {
-            orders.Remove(@order);
-            Context.SaveChanges();
-            await Task.CompletedTask;
-
-        }
-
-
     }
 }
