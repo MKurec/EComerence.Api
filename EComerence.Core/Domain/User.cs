@@ -20,8 +20,10 @@ namespace EComerence.Core.Domain
         public string Address { get; protected set; }      
         public string PostalCode { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
+      public virtual List<UserProductProbability> UserProductProbabilities { get; set; }
 
-        protected User()
+
+      protected User()
         {
 
         }

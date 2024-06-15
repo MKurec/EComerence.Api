@@ -22,7 +22,7 @@ export default {
   css: [
     '@fortawesome/fontawesome-free/css/all.css'
   ],
-  
+
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -41,7 +41,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/auth-next'
   ],
 

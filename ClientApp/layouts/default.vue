@@ -10,8 +10,16 @@
 </template>
 
 <script>
-import Header from '../../ClientApp/components/header/Header.vue'
+import Header from "../../ClientApp/components/header/Header.vue";
+import https from "https";
+import axios from "axios";
+
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
+axios.defaults.httpsAgent = agent;
 export default {
   components: { Header },
-}
+};
 </script>

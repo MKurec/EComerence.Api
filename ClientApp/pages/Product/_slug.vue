@@ -24,19 +24,19 @@
               <v-list-item-content>
                 <v-row class="d-flex justify-space-between px-6 pt-4"
                   ><v-icon>fas fa-money-bill</v-icon>
-                  <v-header>{{ product.price }} zł</v-header>
+                  <v-list-item-title>{{ product.price }} zł</v-list-item-title>
                 </v-row>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content class="d-flex justify-center mb-6">
-                <v-header v-if="product.amount > 0"
+                <v-list-item-title v-if="product.amount > 0"
                   ><v-icon color="green accent-4">fas fa-check-circle</v-icon>
-                  dostępny</v-header
+                  dostępny</v-list-item-title
                 >
-                <v-header v-if="product.amount < 1"
+                <v-list-item-title v-if="product.amount < 1"
                   ><v-icon color="red accent-4">fas fa-times-circle</v-icon>
-                  nie-dostępny</v-header
+                  nie-dostępny</v-list-item-title
                 >
               </v-list-item-content>
             </v-list-item>
@@ -125,6 +125,14 @@ export default {
       loginDialog: false,
       model: null,
     };
+  },
+  methods: {
+    async addToOrder() {
+      await this.$axios.post("https://localhost:44367/Orders", {
+        productId: this.product.id,
+        amount: "1",
+      });
+    },
   },
 };
 </script>

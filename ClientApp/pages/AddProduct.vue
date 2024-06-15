@@ -3,7 +3,7 @@
     <v-card class="overflow-hidden my-10 mx-10" color="teal lighten-5">
       <v-toolbar flat color="teal lighten-2">
         <v-toolbar-title class="font-weight-light">
-          Dodaj produkt 
+          Dodaj produkt
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -67,7 +67,7 @@
     <v-card class="overflow-hidden my-10 mx-10" color="teal lighten-5">
       <v-toolbar flat color="teal lighten-2">
         <v-toolbar-title class="font-weight-light">
-          Dodaj podkategorie 
+          Dodaj podkategorie
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -116,9 +116,9 @@ export default {
 
   methods: {
     customFilter(item, queryText, itemText) {
-      const textOne = item.name.toLowerCase();
-      const textTwo = item.abbr.toLowerCase();
-      const searchText = queryText.toLowerCase();
+      const textOne = item.name;
+      const textTwo = item.abbr;
+      const searchText = queryText;
 
       return (
         textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
@@ -148,18 +148,18 @@ export default {
       const fd = new FormData();
       if (this.photo) {
         fd.append("photo", this.photo, this.photo.name);
-        await this.$axios
-          .post(
-            "https://localhost:44367/Products/AddPhoto/" + this.productid,
-             fd ,
-            { headers: { "Content-Type": "multipart/form-data" } }
-          );
+        await this.$axios.post(
+          "https://localhost:44367/Products/AddPhoto/" + this.productid,
+          fd,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
       }
     },
     async addSubCategory() {
       await this.$axios
         .post("https://localhost:44367/Products", {
-          name: this.setSubCategoryName })
+          name: this.setSubCategoryName,
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -170,6 +170,6 @@ export default {
     var producers = await $axios.$get("https://localhost:44367/Producers");
     return { producers, categories };
   },
-  middleware: 'isadmin'
+  middleware: "isadmin",
 };
 </script>

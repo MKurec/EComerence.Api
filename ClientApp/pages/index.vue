@@ -1,7 +1,7 @@
 
 <template>
-  <ul class="flex flex-col lg:flex-row gap-10">
-    <v-col style="max-width: 200px" flex-grow="0">
+  <v-row>
+    <v-col style="max-width: 200px">
       <v-treeview
         style="min-width: 199px"
         :active.sync="active"
@@ -11,9 +11,9 @@
         return-object
       ></v-treeview>
     </v-col>
-    <v-col flex-grow="1">
+    <v-col>
       <v-row
-        ><div class="flex flex-wrap gap-4" flex-grow="1">
+        ><div class="container">
           <Product
             v-for="product in products"
             :product="product"
@@ -25,10 +25,12 @@
         ><v-pagination :total-visible="7"> </v-pagination
       ></v-row>
     </v-col>
-  </ul>
+  </v-row>
 </template>
 
 <script>
+import Product from "@/components/Product.vue";
+
 export default {
   data() {
     return {
@@ -37,6 +39,9 @@ export default {
       active: [],
       page: 1,
     };
+  },
+  components: {
+    Product,
   },
   watch: {
     active: async function () {
@@ -53,10 +58,18 @@ export default {
       }
     },
   },
-  async fetch() {
-    this.items = await fetch(
-      "https://localhost:44367/Categories/Tree"
-    ).then((res) => res.json());
+  async created() {
+    this.items = await fetch("https://localhost:44367/Categories/Tree").then(
+      (res) => res.json()
+    );
   },
 };
-</script> 
+</script>
+<style scoped>
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust this value to change the space between your products */
+}
+</style>

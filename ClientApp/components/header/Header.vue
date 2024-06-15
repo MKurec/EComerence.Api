@@ -35,7 +35,9 @@
     <div v-if="$auth.loggedIn"></div>
     <div v-else>
       <v-row>
-        <v-col class="d-flex align-center pl-6"><Register></Register></v-col>
+        <v-col class="d-flex align-center pl-6">
+          <Register> </Register>
+        </v-col>
         <v-col class="d-flex align-start pr-8"
           ><v-btn color="primary" @click.stop="loginDialog = true">
             Zaloguj </v-btn
@@ -46,6 +48,8 @@
   </v-app-bar>
 </template>
 <script>
+import Register from "@/components/Register.vue";
+import Login from "@/components/Login.vue";
 export default {
   name: "VmHeader",
   methods: {
@@ -53,6 +57,11 @@ export default {
       await this.$auth.logout();
     },
   },
+  components: {
+    Register,
+    Login,
+  },
+
   data() {
     return {
       loginDialog: false,
