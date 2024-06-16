@@ -77,7 +77,7 @@ namespace EComerence.Infrastructure.Repositories
             .OnDelete(DeleteBehavior.Restrict);
             entity.HasOne(e => e.User)
             .WithMany(u => u.UserProductProbabilities)
-            .HasForeignKey(u => u.ProductId)
+            .HasForeignKey(u => u.UserId)
             .IsRequired(true)
             .OnDelete(DeleteBehavior.Restrict);
          });

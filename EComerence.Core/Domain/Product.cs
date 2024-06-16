@@ -18,6 +18,8 @@ namespace EComerence.Core.Domain
       public string CategoryName { get; protected set; }
       public Guid? CopurchasedProductId { get; protected set; }
 
+      public string RecomendationsJson { get; protected set; }
+
       public virtual List<UserProductProbability> UserProductProbabilities { get; set; }
 
       public Product(Guid id, string name, int amount, decimal price, string producerName, Guid producerId, string categoryName, Guid categoryId, string description, string brandTag)
@@ -95,6 +97,16 @@ namespace EComerence.Core.Domain
       public void SetCopurchasedProductId(Guid id)
       {
          CopurchasedProductId = id;
+      }
+      public void SetRecomendations(Dictionary<Guid,float> dictionary)
+      {
+         RecomendationsJson = System.Text.Json.JsonSerializer.Serialize(dictionary);
+      }
+      public Dictionary<Guid, float> GetRecomendations()
+      {
+         return string.IsNullOrEmpty(RecomendationsJson)
+            ? new Dictionary<Guid, float> ()
+            : System.Text.Json.JsonSerializer.Deserialize<Dictionary<Guid, float>>(RecomendationsJson);
       }
 
 

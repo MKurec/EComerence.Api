@@ -48,7 +48,9 @@ namespace EComerence.Infrastructure.Repositories
         }
         public async Task UpdateBulkAsync(IEnumerable<Product> products)
         {
-            await Context.BulkUpdateAsync(products);
+            Context.UpdateRange(products);
+            Context.SaveChanges();
+         await Task.CompletedTask;
         }
         public async Task DeleteAsync(Product @product)
         {
