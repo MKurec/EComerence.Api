@@ -98,15 +98,15 @@ namespace EComerence.Core.Domain
       {
          CopurchasedProductId = id;
       }
-      public void SetRecomendations(Dictionary<Guid,float> dictionary)
+      public void SetRecomendations(Dictionary<Guid, float> dictionary)
       {
          RecomendationsJson = System.Text.Json.JsonSerializer.Serialize(dictionary);
       }
-      public Dictionary<Guid, float> GetRecomendations()
+      public Dictionary<Guid, double> GetRecomendations()
       {
          return string.IsNullOrEmpty(RecomendationsJson)
-            ? new Dictionary<Guid, float> ()
-            : System.Text.Json.JsonSerializer.Deserialize<Dictionary<Guid, float>>(RecomendationsJson);
+            ? new Dictionary<Guid, double> ()
+            : System.Text.Json.JsonSerializer.Deserialize<Dictionary<Guid, double>>(RecomendationsJson);
       }
 
 

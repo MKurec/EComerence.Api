@@ -77,29 +77,6 @@ namespace EComerence.Infrastructure.Repositories
          return await Task.FromResult(xproducts);
       }
 
-      public class UserProductProbabilityRepository : IUserProductProbabilityRepository
-      {
-         protected readonly DbContext Context;
-         private DbSet<UserProductProbability> products;
-         public UserProductProbabilityRepository(DbContext context)
-         {
-            this.Context = context;
-            this.products = Context.Set<UserProductProbability>();
-         }
 
-
-
-         public async Task<List<UserProductProbability>> GetAsync(Guid id, int num)
-         {
-            var productProbabilities = await Task.FromResult(Context.Set<UserProductProbability>()
-               .Where(x => x.UserId == id)
-               .OrderBy(x => x.Probablity)
-               .Take(num)
-               .ToList()
-               );
-            return productProbabilities;
-         }
-
-      }
    }
 }

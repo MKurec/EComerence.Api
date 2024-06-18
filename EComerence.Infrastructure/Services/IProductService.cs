@@ -11,7 +11,7 @@ namespace EComerence.Infrastructure.Services
 {
     public interface IProductService
     {
-        Task<ProductDto> GetAsync(Guid id);
+        Task<ProductDto> GetAsync(Guid id, Guid userId);
         Task<ProductDto> GetAsync(string email);
         Task<FileStream> GetPhotoAsync(Guid id);
 

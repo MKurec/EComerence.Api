@@ -7,6 +7,7 @@ using MachineLearningWorker;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using MachineLearningWorker.MachineLearining;
+using System.Runtime.CompilerServices;
 
 //IHost host = Host.CreateDefaultBuilder(args)
 //    .ConfigureServices(services =>
@@ -49,16 +50,16 @@ class Program
 
       var orderListService = serviceProvider.GetService<IOrderListService>();
 
-      TrainCopurchasedProductModel(orderListService, productRepository, productService);
+      await TrainCopurchasedProductModel(orderListService, productRepository, productService);
 
       Console.WriteLine("Application finished.");
       Console.ReadLine();
    }
-   private static void TrainCopurchasedProductModel(IOrderListService orderListService,IProductRepository productRepository, IProductService productService)
+   private static async Task TrainCopurchasedProductModel(IOrderListService orderListService,IProductRepository productRepository, IProductService productService)
    {
 
       var task = new MatrixFactoryzation(orderListService, productService, productRepository);
-      task.TrainAsync();
+      await task.TrainAsync();
 
 
    }

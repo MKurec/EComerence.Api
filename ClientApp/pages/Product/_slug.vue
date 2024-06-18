@@ -98,12 +98,12 @@
       <h2 class="text-center pt-5">You may also want</h2>
 
       <v-slide-group v-model="model" active-class="success" show-arrows>
-        <v-slide-item v-for="n in 3" :key="n" class="ml-5">
-          <Product
-            :product="recomendedProduct"
-            :key="recomendedProduct.id"
-            class="ma-5"
-          />
+        <v-slide-item
+          v-for="product in recomendedProducts"
+          :key="product.id"
+          class="ml-5"
+        >
+          <Product :product="product" class="ma-5" />
         </v-slide-item>
       </v-slide-group>
     </v-sheet>
@@ -115,10 +115,14 @@ export default {
     const product = await $axios.$get(
       "https://localhost:44367/Products/" + params.slug
     );
-    const recomendedProduct = await $axios.$get(
-      "https://localhost:44367/Products/" + product.copurchasedProductId
+
+    const recomendedProducts = await Promise.all(
+      product.copurchasedProductIds.map((id) =>
+        $axios.$get("https://localhost:44367/Products/" + id)
+      )
     );
-    return { product, recomendedProduct };
+
+    return { product, recomendedProducts };
   },
   data() {
     return {

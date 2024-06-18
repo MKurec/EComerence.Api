@@ -40,23 +40,49 @@ user_producer_freq = orders_df.groupby(['UserId', 'ProducerName']).size().unstac
 features = user_brand_tag_freq.join(user_producer_freq, how='inner', lsuffix='_brand', rsuffix='_producer').reset_index()
 features = features.fillna(0)
 
+# Generate negative samples
+users = orders_df['UserId'].unique()
+products = orders_df['ProductId'].unique()
+
+negative_samples = []
+for user in users:
+    for product in products:
+        if not ((orders_df['UserId'] == user) & (orders_df['ProductId'] == product)).any():
+            negative_samples.append([user, product, 0])
+
+negative_df = pd.DataFrame(negative_samples, columns=['UserId', 'ProductId', 'target'])
+
+# Undersample negative samples to match the number of positive samples
+negative_df = negative_df.sample(len(orders_df), random_state=42)
+
+
+# Add BrandTag and ProducerName to negative samples by using average or mode values
+avg_brand_tag = orders_df['BrandTag'].mode()[0]
+avg_producer_name = orders_df['ProducerName'].mode()[0]
+ 
+negative_df['BrandTag'] = avg_brand_tag
+negative_df['ProducerName'] = avg_producer_name
+
+# Add target column to the positive samples
+orders_df['target'] = 1
+
+# Combine positive and negative samples
+data = pd.concat([orders_df[['UserId', 'ProductId', 'target', 'BrandTag', 'ProducerName']], negative_df], ignore_index=True)
+
+# Prepare the data for model training
+features = data[['UserId', 'BrandTag', 'ProducerName']].copy()
+user_brand_tag_freq = features.groupby(['UserId', 'BrandTag']).size().unstack(fill_value=0)
+user_producer_freq = features.groupby(['UserId', 'ProducerName']).size().unstack(fill_value=0)
+
+combined_features = user_brand_tag_freq.join(user_producer_freq, how='inner', lsuffix='_brand', rsuffix='_producer').reset_index()
+combined_features = combined_features.fillna(0)
+
 # Add ProductId to features
-features = features.merge(orders_df[['UserId', 'ProductId']], on='UserId')
+combined_features = combined_features.merge(data[['UserId', 'ProductId']], on='UserId')
 
 # Convert column names to strings
-features.columns = features.columns.astype(str)
+combined_features.columns = combined_features.columns.astype(str)
 
-# Target variable
-orders_df['target'] = 1  # We assume the user bought the product
-data = features.merge(orders_df[['UserId', 'ProductId', 'target']], on=['UserId', 'ProductId'], how='left').fillna(0)
-
-# Check if there are enough samples for both classes
-if data['target'].sum() == 0 or (data['target'] == 0).sum() == 0:
-    print("Warning: The target variable does not have enough samples for both classes.")
-    # Add synthetic data for the minority class
-    synthetic_data = data.sample(frac=0.1, random_state=42)
-    synthetic_data['target'] = 1 - synthetic_data['target']
-    data = pd.concat([data, synthetic_data], ignore_index=True)
 
 # Prepare the data for model training
 X = data.drop(columns=['UserId', 'target'])
@@ -66,10 +92,11 @@ y = data['target']
 X.columns = X.columns.astype(str)
 
 # Model initialization
-model = RandomForestClassifier(n_estimators=100, random_state=42,class_weight='balanced',min_samples_split=10)
+class_weights = {0: 1, 1: 10}
+model = RandomForestClassifier(n_estimators=100, random_state=42,class_weight=class_weights,min_samples_split=20)
 
 # Cross-validation
-cv = StratifiedKFold(n_splits=2, random_state=None, shuffle=True)
+cv = StratifiedKFold(n_splits=2)
 cv_scores = cross_val_score(model, X, y, cv=cv, scoring='accuracy')
 
 print(f'Cross-validation scores: {cv_scores}')
@@ -136,6 +163,12 @@ Base.metadata.create_all(engine)
 # Insert results into the table
 Session = sessionmaker(bind=engine)
 session = Session()
+
+# Delete all records from the UserProductProbabilitys table
+session.query(UserProductProbability).delete()
+
+# Commit the changes to the database
+session.commit()
 
 for result in results:
     if len(result) >= 3:  # Ensure there are at least 3 elements in the tuple

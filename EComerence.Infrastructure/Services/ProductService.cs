@@ -12,6 +12,8 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Linq;
 
 namespace EComerence.Infrastructure.Services
 {
@@ -20,6 +22,7 @@ namespace EComerence.Infrastructure.Services
       private readonly IProductRepository _productRepository;
       private readonly IProducerRepository _producerRepository;
       private readonly ICategoryRepository _categoryRepository;
+      private readonly IUserProductProbabilityService _userProductProbabilityService;
       private readonly IFileRepository _fileRepository;
       private readonly IMapper _mapper;
       private static readonly string _directory= Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -28,18 +31,43 @@ namespace EComerence.Infrastructure.Services
         return Path.Combine(_directory + "\\uploads\\" + productId + ".png");
       }
 
-      public ProductService(IProductRepository productRepository, IProducerRepository producerRepository, ICategoryRepository categoryRepository, IFileRepository fileRepository, IMapper mapper)
+      public ProductService(IProductRepository productRepository, IProducerRepository producerRepository, ICategoryRepository categoryRepository, IFileRepository fileRepository, IMapper mapper, IUserProductProbabilityService userProductProbabilityService)
       {
          _productRepository = productRepository;
          _producerRepository = producerRepository;
          _categoryRepository = categoryRepository;
+         _userProductProbabilityService = userProductProbabilityService;
          _fileRepository = fileRepository;
          _mapper = mapper;
       }
-      public async Task<ProductDto> GetAsync(Guid id)
+      public async Task<ProductDto> GetAsync(Guid id, Guid userId)
       {
          var @product = await _productRepository.GetAsync(id);
-         return _mapper.Map<ProductDto>(@product);
+         var productDto = _mapper.Map<ProductDto>(@product);
+         try
+         {
+            var recomendations = product.GetRecomendations();
+            if(userId != Guid.Empty)
+            {
+               productDto.CopurchasedProductIds = await _userProductProbabilityService.GetRecomendations(userId, 2, recomendations);
+               
+               if(product.CopurchasedProductId != null)
+                  productDto.CopurchasedProductIds.Add(product.CopurchasedProductId.Value);
+            }
+            else
+            {
+               productDto.CopurchasedProductIds = recomendations.OrderByDescending(x => x.Value)
+                  .Select(x => x.Key)
+                  .Take(3)
+                  .ToList();
+            }
+         }
+         catch (Exception e)
+         {
+            throw new Exception($"Cannot get recomendations for product with id: {id} {e.Message}");
+         }
+
+         return productDto;
       }
       public async Task<ProductDto> GetAsync(string name)
       {

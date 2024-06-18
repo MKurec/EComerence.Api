@@ -75,12 +75,10 @@ namespace MachineLearningWorker.MachineLearining
          MLContext mlContext = new MLContext();
 
          //STEP 2: Read the trained data using TextLoader by defining the schema for reading the product co-purchase dataset
-         //        Do remember to replace amazon0302.txt with dataset from https://snap.stanford.edu/data/amazon0302.html
          var trainData = mlContext.Data.LoadFromEnumerable<ProductEntry>(productEntries);
 
 
          //STEP 3: Your data is already encoded so all you need to do is specify options for MatrxiFactorizationTrainer with a few extra hyperparameters
-         //        LossFunction, Alpa, Lambda and a few others like K and C as shown below and call the trainer. 
          MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options
          {
 
@@ -98,10 +96,9 @@ namespace MachineLearningWorker.MachineLearining
 
 
          //STEP 5: Train the model fitting to the DataSet
-         //Please add Amazon0302.txt dataset from https://snap.stanford.edu/data/amazon0302.html to Data folder if FileNotFoundException is thrown.
          ITransformer model = est.Fit(trainData);
 
-         //STEP 6: Create prediction engine and predict the score for Product 63 being co-purchased with Product 3.
+         //STEP 6: Create prediction engine
          //        The higher the score the higher the probability for this particular productID being co-purchased 
          var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
 
@@ -122,15 +119,10 @@ namespace MachineLearningWorker.MachineLearining
                      CoPurchaseProductID = ConvertGuidToInt(coPurchaseProductId)
                   });
 
-                  if (prediction.Score > maxScore)
-                  {
-                     maxScore = prediction.Score;
-                     maxCoPurchaseProductId = coPurchaseProductId;
-                  }
+                  recommendations.Add((productId, coPurchaseProductId, prediction.Score));
                }
             }
 
-            recommendations.Add((productId, maxCoPurchaseProductId, maxScore));
          }
          await SaveChanges(recommendations);
          Console.WriteLine("=============== End of process, hit any key to finish ===============");
@@ -143,12 +135,12 @@ namespace MachineLearningWorker.MachineLearining
          foreach (var product in products)
          {
             var guid = recommendations.Where(x => x.Item1 == product.Id)
-           .OrderBy(x => x.Item3)
+           .OrderByDescending(x => x.Item3)
            .Select(x => x.Item2)
            .FirstOrDefault();
 
             var recomendations = recommendations.Where(x => x.Item1 == product.Id)
-                .OrderBy(x => x.Item3)
+                .OrderByDescending(x => x.Item3)
                 .Select( x=> new KeyValuePair<Guid,float> (x.Item2, x.Item3 ))
                 .Take(30)
                 .ToDictionary(x => x.Key, x => x.Value);

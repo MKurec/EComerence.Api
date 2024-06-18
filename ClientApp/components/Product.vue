@@ -2,7 +2,7 @@
   <v-hover>
     <template v-slot:default="{ hover }">
       <v-card class="mx-auto" width="400" :elevation="hover ? 10 : 4">
-        <NuxtLink :to="'Product/' + product.id">
+        <NuxtLink :to="'/Product/' + product.id">
           <v-img
             class="white--text align-end"
             max-height="200px"

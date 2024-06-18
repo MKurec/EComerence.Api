@@ -42,15 +42,16 @@ namespace EComerence.Api.Controllers
       [HttpGet("{productId}")]
       public async Task<IActionResult> Get(Guid productId)
       {
-         var @product = await _productService.GetAsync(productId);
+         if(productId == Guid.Empty)
+            {
+            return NotFound();
+         }
+     
+         var @product = await _productService.GetAsync(productId, UserId);
          if (@product == null)
          {
             return NotFound();
          }
-         var userId = Guid.Parse(User.Identity.Name);
-         var probabilieties = await _userProductProbabilityRepository.GetAsync(userId, 2);
-         product.RecomendationsJson= JsonSerializer.Serialize( probabilieties.Select(x => x.Product));
-
          return Json(@product);
       }
       [Route("Image/{productId}")]
