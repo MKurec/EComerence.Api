@@ -18,5 +18,10 @@ namespace EComerence.Core.Repositories
         Task DeleteAsync(Product product);
         Task UpdateBulkAsync(IEnumerable<Product> products);
     }
+
+   public interface IUserProductProbabilityRepository
+   {
+      Task<List<UserProductProbability>> GetAsync(Guid id, int num);
+   }
 }
 
