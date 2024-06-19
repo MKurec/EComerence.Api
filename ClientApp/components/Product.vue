@@ -50,6 +50,7 @@
 </template>
 <script>
 import Login from "./Login.vue";
+import { EventBus } from "@/event-bus.js";
 export default {
   components: { Login },
   props: {
@@ -67,8 +68,9 @@ export default {
     async addToOrder() {
       await this.$axios.post("https://localhost:44367/Orders", {
         productId: this.product.id,
-        amount: "1",
+        amount: "-1",
       });
+      EventBus.$emit("updateBasketCount");
     },
   },
 };

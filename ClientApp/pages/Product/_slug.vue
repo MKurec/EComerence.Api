@@ -134,7 +134,7 @@ export default {
     async addToOrder() {
       await this.$axios.post("https://localhost:44367/Orders", {
         productId: this.product.id,
-        amount: "1",
+        amount: "-1",
       });
     },
   },

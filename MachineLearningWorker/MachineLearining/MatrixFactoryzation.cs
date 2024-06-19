@@ -58,19 +58,26 @@ namespace MachineLearningWorker.MachineLearining
 
          throw new ArgumentException("Integer value not found in the dictionary.");
       }
-      public async Task TrainAsync()
+
+      public Task PrepareData(out List<Guid> productList,out List<ProductEntry> productEntries )
       {
-         var orderList = await _orderListService.GetOrders();
-         List<Guid> productList = _productService.BrowseAsync().Result.Select(p => p.Id).ToList();
+         var orderList = _orderListService.GetOrders().Result;
+         productList = _productService.BrowseAsync().Result.Select(p => p.Id).ToList();
          GuidConverter(productList);
 
-         List<ProductEntry> productEntries = orderList
+         productEntries = orderList
              .Select(pair => new ProductEntry
              {
                 ProductID = ConvertGuidToInt(pair.Item1),
                 CoPurchaseProductID = ConvertGuidToInt(pair.Item2)
              })
              .ToList();
+         return Task.CompletedTask;
+      }
+      public async Task TrainAsync()
+      {
+         PrepareData(out List<Guid> productList, out List<ProductEntry> productEntries).Wait();
+
          //STEP 1: Create MLContext to be shared across the model creation workflow objects 
          MLContext mlContext = new MLContext();
 
@@ -102,11 +109,12 @@ namespace MachineLearningWorker.MachineLearining
          //        The higher the score the higher the probability for this particular productID being co-purchased 
          var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
 
+
+         //STEP 7: Create product recommendations for the specified product
          List<(Guid, Guid, float)> recommendations = new();
 
          foreach (var productId in productList)
          {
-            float maxScore = 0;
             Guid maxCoPurchaseProductId = Guid.Empty;
 
             foreach (var coPurchaseProductId in productList)
@@ -128,6 +136,7 @@ namespace MachineLearningWorker.MachineLearining
          Console.WriteLine("=============== End of process, hit any key to finish ===============");
          Console.ReadKey();
       }
+
 
       private async Task SaveChanges(List<(Guid, Guid, float)> recommendations)
       {

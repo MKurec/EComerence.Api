@@ -62,6 +62,15 @@ export default {
     this.items = await fetch("https://localhost:44367/Categories/Tree").then(
       (res) => res.json()
     );
+    if (this.active[0] != null) {
+      let products = await this.$axios.$get(
+        "https://localhost:44367/Products/Category/" + this.active[0].id
+      );
+      this.products = products;
+    } else {
+      let products = await this.$axios.$get("https://localhost:44367/Products");
+      this.products = products;
+    }
   },
 };
 </script>

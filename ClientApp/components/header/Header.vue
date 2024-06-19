@@ -23,7 +23,7 @@
     <v-spacer></v-spacer>
     <NuxtLink to="/order/" no-prefetch v-if="$auth.loggedIn">
       <v-btn icon v-if="$auth.loggedIn">
-        <v-badge color="orange" content="6">
+        <v-badge color="orange" :content="basketcount">
           <v-icon>fas fa-shopping-basket</v-icon>
         </v-badge>
       </v-btn>
@@ -50,22 +50,42 @@
 <script>
 import Register from "@/components/Register.vue";
 import Login from "@/components/Login.vue";
+import { EventBus } from "@/event-bus.js";
+
 export default {
+  data() {
+    return {
+      loginDialog: false,
+      basketcount: 0,
+    };
+    basketcount: 0;
+  },
+  async fetch() {
+    this.basketcount = await this.$axios.$get(
+      "https://localhost:44367/Orders/ItemsCount"
+    );
+  },
+  created() {
+    EventBus.$on("updateBasketCount", this.handleUpdateBasketCount);
+  },
+  beforeDestroy() {
+    EventBus.$off("updateBasketCount", this.handleUpdateBasketCount);
+  },
   name: "VmHeader",
   methods: {
     async logout() {
       await this.$auth.logout();
     },
+    async handleUpdateBasketCount() {
+      this.basketcount = await this.$axios.$get(
+        "https://localhost:44367/Orders/ItemsCount"
+      );
+      console.log("Basket count updated");
+    },
   },
   components: {
     Register,
     Login,
-  },
-
-  data() {
-    return {
-      loginDialog: false,
-    };
   },
 };
 </script>

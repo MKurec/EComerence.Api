@@ -77,5 +77,20 @@ namespace EComerence.Core.Domain
          Purchased = true;
       }
 
+      public int GetAmountOfProducts()
+      {
+         if (Orders.Count == 0)
+            return 0;
+         else
+         {
+            int amount = 0;
+            foreach (Product product in Orders.Keys)
+            {
+               amount += Orders[product];
+            }
+            return amount;
+         }
+      }
+
    }
 }
