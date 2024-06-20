@@ -59,6 +59,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="success" @click="addProduct"> Dodaj </v-btn>
+        <v-btn color="success" @click="addPhoto"> Dodaj Zdjęcie </v-btn>
       </v-card-actions>
       <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
         Your profile has been updated
@@ -113,6 +114,9 @@ export default {
       },
     };
   },
+  created() {
+    this.productid = this.$route.params.id;
+  },
 
   methods: {
     customFilter(item, queryText, itemText) {
@@ -149,7 +153,8 @@ export default {
       if (this.photo) {
         fd.append("photo", this.photo, this.photo.name);
         await this.$axios.post(
-          "https://localhost:44367/Products/AddPhoto/" + this.productid,
+          "https://localhost:44367/Products/AddPhoto/" +
+            "7bed7fde-5b90-41f1-9344-0ac8477da09a",
           fd,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -166,10 +171,10 @@ export default {
     },
   },
   async asyncData({ $axios }) {
-    var categories = await $axios.$get("https://localhost:44367/Categories");
-    var producers = await $axios.$get("https://localhost:44367/Producers");
+    const categories = await $axios.$get("https://localhost:44367/Categories");
+    const producers = await $axios.$get("https://localhost:44367/Producers");
     return { producers, categories };
   },
-  middleware: "isadmin",
+  middleware: "isAdmin",
 };
 </script>

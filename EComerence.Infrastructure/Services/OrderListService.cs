@@ -171,7 +171,9 @@ namespace EComerence.Infrastructure.Services
             {
                productIds.Add(product.Id);
             }
-
+         }
+         foreach (var product in orderList.Orders.Keys)
+         {
             foreach (var existingProductId in productIds)
             {
                if (existingProductId != product.Id)

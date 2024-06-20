@@ -49,6 +49,9 @@ namespace EComerence.Infrastructure.Services
             var recomendations = product.GetRecomendations();
             if(userId != Guid.Empty)
             {
+               if(product.CopurchasedProductId != null)
+                  recomendations.Remove(product.CopurchasedProductId.Value);
+
                productDto.CopurchasedProductIds = await _userProductProbabilityService.GetRecomendations(userId, 2, recomendations);
                
                if(product.CopurchasedProductId != null)

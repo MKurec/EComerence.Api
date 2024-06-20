@@ -78,6 +78,9 @@ class Program
       services.AddScoped<IOrderRepository, OrderRepository>();
       services.AddScoped<IOrderListService, OrderListService>();
       services.AddScoped<IProductService, ProductService>();
+      services.AddScoped<IUserProductProbabilityService, UserProductProbabilityService>();
+      services.AddScoped<IUserProductProbabilityRepository, UserProductProbabilityRepository>();
+
       services.AddSingleton(AutoMapperConfig.Initialize());
    }
 }

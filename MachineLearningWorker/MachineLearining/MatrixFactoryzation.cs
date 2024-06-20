@@ -1,17 +1,8 @@
-﻿using EComerence.Core.Domain;
-using EComerence.Core.Repositories;
+﻿using EComerence.Core.Repositories;
 using EComerence.Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MachineLearningWorker.MachineLearining
 {
@@ -29,8 +20,6 @@ namespace MachineLearningWorker.MachineLearining
          _productService = productService;
          _productRepository = productRepository;
       }
-
-
 
       public void GuidConverter(List<Guid> guids)
       {
@@ -88,14 +77,13 @@ namespace MachineLearningWorker.MachineLearining
          //STEP 3: Your data is already encoded so all you need to do is specify options for MatrxiFactorizationTrainer with a few extra hyperparameters
          MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options
          {
-
             MatrixColumnIndexColumnName = nameof(ProductEntry.ProductID),
             MatrixRowIndexColumnName = nameof(ProductEntry.CoPurchaseProductID),
             LabelColumnName = "Score",
             LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass,
-            NumberOfIterations = 10,
-            NumberOfThreads = 1,
-            ApproximationRank = 2,
+            NumberOfIterations = 20, 
+            NumberOfThreads = 4, 
+            ApproximationRank = 10, 
          };
 
          //Step 4: Call the MatrixFactorization trainer by passing options.
@@ -115,8 +103,6 @@ namespace MachineLearningWorker.MachineLearining
 
          foreach (var productId in productList)
          {
-            Guid maxCoPurchaseProductId = Guid.Empty;
-
             foreach (var coPurchaseProductId in productList)
             {
                if (coPurchaseProductId != productId)

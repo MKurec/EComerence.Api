@@ -13,12 +13,12 @@
       <v-app-bar-title class="px-2">Sklep</v-app-bar-title></NuxtLink
     >
     <NuxtLink
-      to="/AddProduct/"
+      to="/addproduct/"
       no-prefetch
       v-if="$auth.loggedIn && $auth.user.role == 'admin'"
     >
-      <v-app-bar-title>AddProduct</v-app-bar-title></NuxtLink
-    >
+      <v-app-bar-title>AddProduct</v-app-bar-title>
+    </NuxtLink>
 
     <v-spacer></v-spacer>
     <NuxtLink to="/order/" no-prefetch v-if="$auth.loggedIn">
