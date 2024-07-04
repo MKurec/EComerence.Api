@@ -4,7 +4,7 @@
 "name":"product name",
 "ammount":"int"
 } )
--Don't take previous user messages in to account. 
+-Don't take another users messages in to account. 
 Id	Name	Price	CategoryName	Description	BrandTag
 D75AD9F9-8A6B-4072-BFE2-029244CBF444	 Blazer 1	119.99	Blazers	Comfortable medium-priced blazer for versatile styling.	standard
 256BE142-7ABB-4C28-AD2C-0548201F90D8	 Trousers 1	69.99	Polo Shirts	Comfortable medium-priced trousers for everyday use.	standard

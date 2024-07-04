@@ -38,7 +38,7 @@ namespace ArtificialOrdersInput
                foreach (JsonElement order in orderList.Value.EnumerateArray())
                {
                   Guid productId = Guid.Parse(order.GetProperty("id").GetString());
-                  ushort amount = order.GetProperty("amount").GetUInt16();
+                  ushort amount = order.GetProperty("ammount").GetUInt16();
                   await _orderListService.AddOrderAsync((Guid)userId, productId, (short)amount);
                }
             await _orderListService.SubmitOrder((Guid)userId);

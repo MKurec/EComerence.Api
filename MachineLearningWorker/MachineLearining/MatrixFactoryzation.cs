@@ -27,7 +27,6 @@ namespace MachineLearningWorker.MachineLearining
          uint i = 0;
          foreach (Guid guid in guids)
          {
-
             guidToIntDictionary.Add(i, guid);
             i++;
          }
@@ -79,11 +78,11 @@ namespace MachineLearningWorker.MachineLearining
          {
             MatrixColumnIndexColumnName = nameof(ProductEntry.ProductID),
             MatrixRowIndexColumnName = nameof(ProductEntry.CoPurchaseProductID),
-            LabelColumnName = "Score",
+            LabelColumnName = nameof(ProductEntry.Score),
             LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass,
-            NumberOfIterations = 20, 
-            NumberOfThreads = 4, 
-            ApproximationRank = 10, 
+            Alpha = 1,
+            Lambda = 0.5,
+            C = 0.00001
          };
 
          //Step 4: Call the MatrixFactorization trainer by passing options.
@@ -94,9 +93,7 @@ namespace MachineLearningWorker.MachineLearining
          ITransformer model = est.Fit(trainData);
 
          //STEP 6: Create prediction engine
-         //        The higher the score the higher the probability for this particular productID being co-purchased 
          var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
-
 
          //STEP 7: Create product recommendations for the specified product
          List<(Guid, Guid, float)> recommendations = new();
@@ -107,22 +104,17 @@ namespace MachineLearningWorker.MachineLearining
             {
                if (coPurchaseProductId != productId)
                {
-                  var prediction = predictionEngine.Predict(new ProductEntry
-                  {
+                  var prediction = predictionEngine.Predict(new ProductEntry{
                      ProductID = ConvertGuidToInt(productId),
                      CoPurchaseProductID = ConvertGuidToInt(coPurchaseProductId)
                   });
-
+                     Console.WriteLine(prediction.Score);
                   recommendations.Add((productId, coPurchaseProductId, prediction.Score));
                }
             }
-
          }
          await SaveChanges(recommendations);
-         Console.WriteLine("=============== End of process, hit any key to finish ===============");
-         Console.ReadKey();
       }
-
 
       private async Task SaveChanges(List<(Guid, Guid, float)> recommendations)
       {
@@ -145,7 +137,6 @@ namespace MachineLearningWorker.MachineLearining
          }
          await _productRepository.UpdateBulkAsync(products);
       }
-
    }
 
    public class Copurchase_prediction

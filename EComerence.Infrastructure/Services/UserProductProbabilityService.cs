@@ -26,19 +26,19 @@ namespace EComerence.Infrastructure.Services
       public async Task<List<Guid>> GetRecomendations(Guid userId, int count, Dictionary<Guid,double> copuchrsedProducts)
       {
          var probabilieties = await _userProductProbabilityRepository.GetAsync(userId, 30);
-         var prob = probabilieties.Where(x => copuchrsedProducts.ContainsKey(x.ProductId))
+         var productsSugestedToUser = probabilieties.Where(x => copuchrsedProducts.ContainsKey(x.ProductId))
             .ToDictionary(x=> x.ProductId ,x => x.Probablity);
 
          // merge buing probabilities with copuchrsed products by multiplying double probability
-         foreach (var item in copuchrsedProducts)
+         foreach (var copucharsedProduct in copuchrsedProducts)
          {
-            if (prob.ContainsKey(item.Key))
+            if (productsSugestedToUser.ContainsKey(copucharsedProduct.Key))
             {
-               prob[item.Key] = prob[item.Key] * item.Value;
+               productsSugestedToUser[copucharsedProduct.Key] = productsSugestedToUser[copucharsedProduct.Key] * copucharsedProduct.Value;
             }
          }
          // take top 2 Guids with highest probability
-         var top2 = prob.OrderByDescending(x => x.Value)
+         var top2 = productsSugestedToUser.OrderByDescending(x => x.Value)
             .Select(x => x.Key)
             .Take(count)
             .ToList();

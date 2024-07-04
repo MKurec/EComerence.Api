@@ -8,7 +8,7 @@ IChatbot chatbot = new Chatbot(apiKey);
 
 IBusinessLogic businessLogic = new BusinessLogic(chatbot);
 
-string inputFile = "users_needs.txt";
+string inputFile = "users_needs2.txt";
 string outputFolder = "UserResponses";
 
 // Create the output folder if it doesn't exist

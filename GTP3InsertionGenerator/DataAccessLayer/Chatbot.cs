@@ -13,7 +13,7 @@ namespace LayeredExample.DataAccessLayer
         public Chatbot(string apiKey)
         {
             _client = new OpenAIClient(apiKey);
-            _client.Model = "gpt-3.5-turbo-16k-0613";
+            _client.Model = "gpt-3.5-turbo-1106";
             _client.Temperature = 0.1;
         }
 

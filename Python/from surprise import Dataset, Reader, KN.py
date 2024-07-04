@@ -92,8 +92,8 @@ y = data['target']
 X.columns = X.columns.astype(str)
 
 # Model initialization
-class_weights = {0: 1, 1: 10}
-model = RandomForestClassifier(n_estimators=100, random_state=42,class_weight=class_weights,min_samples_split=20)
+class_weights = {0: 1, 1: 100}
+model = RandomForestClassifier(n_estimators=400, random_state=42,class_weight=class_weights,min_samples_split=2)
 
 # Cross-validation
 cv = StratifiedKFold(n_splits=2)
@@ -174,8 +174,6 @@ for result in results:
     if len(result) >= 3:  # Ensure there are at least 3 elements in the tuple
         user_product_probability = UserProductProbability(UserId=uuid.UUID(result[0]), ProductId=uuid.UUID(result[1]), Probablity=result[2])
         session.add(user_product_probability)
-
-session.commit()
 
 session.commit()
 session.close()

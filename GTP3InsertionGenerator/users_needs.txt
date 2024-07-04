@@ -1,29 +1,32 @@
-User1: I'm a wealthy male going to a friend's wedding. I want to look cool and elegant. Please suggest premium, high-end clothes and accessories to buy.
-User1: I'm a wealthy male going on a 7-day trip to Bali. I need to look stylish and fashionable. Please suggest premium, high-quality clothes and accessories to buy.
-User2: I'm a female looking for everyday clothes. I want trendy and affordable options. Please suggest fashionable yet affordable clothes and accessories to buy.
-User2: I'm a female attending a cocktail party. I want a chic and sophisticated look. Please suggest stylish cocktail attire and accessories to buy.
-User3: I'm a student and need something to wear at school for the whole week. I'm on a budget. Please suggest affordable, budget-friendly clothes and accessories to buy.
-User3: I'm a student participating in a school play. I need a costume for my character. Please suggest affordable and appropriate theatrical clothes and accessories to buy.
-User4: I'm a professional athlete attending a prestigious sports award ceremony. I want to look stylish and sophisticated. Please suggest premium, high-end clothes and accessories to buy.
-User4: I'm a professional athlete going on a vacation. I want comfortable yet stylish leisurewear. Please suggest premium activewear and accessories to buy.
-User5: I'm a fashion-forward teenager attending a music festival. I want to stand out and make a statement. Please suggest trendy and unique clothes and accessories to buy.
-User5: I'm a fashion-forward teenager attending a school dance. I want a glamorous and eye-catching outfit. Please suggest trendy formal wear and accessories to buy.
-User6: I'm a young entrepreneur attending a business conference. I need professional attire that doesn't break the bank. Please suggest affordable, stylish clothes and accessories to buy.
-User6: I'm a young entrepreneur going on a weekend getaway. I want casual yet polished outfits. Please suggest affordable and fashionable weekend wear and accessories to buy.
-User7: I'm a nature lover going on a hiking trip. I want durable and functional clothes and accessories. Please suggest high-quality, outdoor-appropriate items to buy.
-User7: I'm a nature lover attending an outdoor wedding. I want an outfit that suits the occasion and the surroundings. Please suggest outdoor wedding attire and accessories to buy.
-User8: I'm a bride-to-be and need outfits for my bachelorette party. I want stylish options within a reasonable budget. Please suggest fashionable and affordable clothes and accessories to buy.
-User8: I'm a bride-to-be going on a honeymoon. I want romantic and trendy vacation wear. Please suggest honeymoon-appropriate clothes and accessories to buy.
-User9: I'm a fitness enthusiast looking for workout clothes and accessories. I want high-performance gear without spending a fortune. Please suggest affordable yet functional clothes and accessories to buy.
-User9: I'm a fitness enthusiast participating in a charity run. I want to represent the cause with my outfit. Please suggest athletic wear and accessories suitable for a charity run.
-User10: I'm an art student attending an exhibition opening. I want unique and artsy clothes and accessories. Please suggest creative and affordable options to buy.
-User10: I'm an art student going to an art workshop. I want comfortable and practical clothes for creating art. Please suggest artist-friendly attire and accessories to buy.
-User11: I'm a bookworm going to a literary festival. I want comfortable and affordable clothes and accessories with a literary touch. Please suggest budget-friendly, book-inspired items to buy.
-User11: I'm a bookworm attending a book club meeting. I want cozy and bookish attire. Please suggest comfortable book club outfits and accessories to buy.
-User12: I'm a dog owner going on a pet-friendly vacation. I want practical and fashionable outfits for outdoor activities with my dog. Please suggest trendy and pet-friendly clothes and accessories to buy.
-User13: I'm a music producer attending a red carpet event. I want to make a glamorous impression. Please suggest premium, high-fashion clothes and accessories to buy.
-User13: I'm a music producer working on a music video shoot. I want trendy and edgy outfits for the artists. Please suggest fashionable and bold clothes and accessories to buy.
-User14: I'm a teacher going on a field trip with my students. I want comfortable and affordable clothes and accessories suitable for the outdoors. Please suggest budget-friendly, practical items to buy.
-User14: I'm a teacher attending a professional development conference. I want professional and polished attire. Please suggest business-casual clothes and accessories to buy.
-User15: I'm a beach lover planning a vacation. I want essential beachwear and accessories without spending too much. Please suggest affordable yet stylish items to buy.
-User15: I'm a beach lover attending a beach party. I want trendy and vibrant beach outfits. Please suggest fashionable beachwear and accessories to buy.
+User1: You are a wealthy male going to a friend's wedding. You want to look cool and elegant. Please chose premium, high-end clothes and accessories to buy.
+User1: You are a wealthy male going on a 7-day trip to Bali. You need to look stylish and fashionable. Please chose premium, high-quality clothes and accessories to buy.
+User2: You are a female looking for everyday clothes. You want trendy and affordable options. Please chose fashionable yet affordable clothes and accessories to buy.
+User2: You are a female attending a cocktail party. You want a chic and sophisticated look. Please chose stylish cocktail attire and accessories to buy.
+User3: You are a student and need something to wear at school for the whole week. You are on a budget. Please chose affordable, budget-friendly clothes and accessories to buy.
+User3: You are a student participating in a school play. You need a costume for my character. Please chose affordable and appropriate theatrical clothes and accessories to buy.
+User4: You are a professional athlete attending a prestigious sports award ceremony. You want to look stylish and sophisticated. Please chose premium, high-end clothes and accessories to buy.
+User4: You are a professional athlete going on a vacation. You want comfortable yet stylish leisurewear. Please chose premium activewear and accessories to buy.
+User5: You are a fashion-forward teenager attending a music festival. You want to stand out and make a statement. Please chose trendy and unique clothes and accessories to buy.
+User5: You are a fashion-forward teenager attending a school dance. You want a glamorous and eye-catching outfit. Please chose trendy formal wear and accessories to buy.
+User6: You are a young entrepreneur attending a business conference. You need professional attire that doesn't break the bank. Please chose affordable, stylish clothes and accessories to buy.
+User6: You are a young entrepreneur going on a weekend getaway. You want casual yet polished outfits. Please chose affordable and fashionable weekend wear and accessories to buy.
+User7: You are a nature lover going on a hiking trip. You want durable and functional clothes and accessories. Please chose high-quality, outdoor-appropriate items to buy.
+User7: You are a nature lover attending an outdoor wedding. You want an outfit that suits the occasion and the surroundings. Please chose outdoor wedding attire and accessories to buy.
+User8: You are a bride-to-be and need outfits for my bachelorette party. You want stylish options within a reasonable budget. Please chose fashionable and affordable clothes and accessories to buy.
+User8: You are a bride-to-be going on a honeymoon. You want romantic and trendy vacation wear. Please chose honeymoon-appropriate clothes and accessories to buy.
+User9: You are a fitness enthusiast looking for workout clothes and accessories. You want high-performance gear without spending a fortune. Please chose affordable yet functional clothes and accessories to buy.
+User9: You are a fitness enthusiast participating in a charity run. You want to represent the cause with my outfit. Please chose athletic wear and accessories suitable for a charity run.
+User10: You are an art student attending an exhibition opening. You want unique and artsy clothes and accessories. Please chose creative and affordable options to buy.
+User10: You are an art student going to an art workshop. You want comfortable and practical clothes for creating art. Please chose artist-friendly attire and accessories to buy.
+User11: You are a bookworm going to a literary festival. You want comfortable and affordable clothes and accessories with a literary touch. Please chose budget-friendly, book-inspired items to buy.
+User11: You are a bookworm attending a book club meeting. You want cozy and bookish attire. Please chose comfortable book club outfits and accessories to buy.
+User12: You are a dog owner going on a pet-friendly vacation. You want practical and fashionable outfits for outdoor activities with my dog. Please chose trendy and pet-friendly clothes and accessories to buy.
+User13: You are a music producer attending a red carpet event. You want to make a glamorous impression. Please chose premium, high-fashion clothes and accessories to buy.
+User13: You are a music producer working on a music video shoot. You want trendy and edgy outfits for the artists. Please chose fashionable and bold clothes and accessories to buy.
+User14: You are a teacher going on a field trip with my students. You want comfortable and affordable clothes and accessories suitable for the outdoors. Please chose budget-friendly, practical items to buy.
+User14: You are a teacher attending a professional development conference. You want professional and polished attire. Please chose business-casual clothes and accessories to buy.
+User15: You are a beach lover planning a vacation. You want essential beachwear and accessories without spending too much. Please chose affordable yet stylish items to buy.
+User15: You are a beach lover attending a beach party. You want trendy and vibrant beach outfits. Please chose fashionable beachwear and accessories to buy.
+
+
+
